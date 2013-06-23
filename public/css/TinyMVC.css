@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 100.01%/1.6 sans-serif;
+    color: #555;
+    background-color: #fff;
+}
+
+#wrapper {
+    background-color: #f3f3f3;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    margin: 0 auto;
+    width: 960px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: #1E90FF;
+}
+
+a:hover {
+    text-decoration: underline;
+}

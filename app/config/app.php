@@ -5,8 +5,8 @@ return array(
     'controller_dir' => 'controller',               // within app/ dir
     'model_dir' => 'model',                         // within app/ dir
     'title' => 'My awesome project',                // title of your project
-    'base_url' => 'http://localhost/myproject/',    // trailing slash required
-    'install_dir' => 'myproject',                   // no slash to start with, and no trailing slash
+    'base_url' => 'http://localhost/TinyMVC/',      // trailing slash required
+    'install_dir' => 'TinyMVC',                     // no slash to start with, and no trailing slash
     'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
     'default_controller' => 'home',                 // the controller used, when current URL == Base URL
     'default_action' => 'index',                    // the default method name of a controller, when just http://www.example.com/controller is called

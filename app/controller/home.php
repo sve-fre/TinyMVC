@@ -3,31 +3,23 @@
 class home {
 
     public function index() {
-        /*
-        // Example of Usage
-        View::layout('default', ['title' => Config::get('app.title')], function($layout, $data) {
-            $data = [
-                'title' => Config::get('app.title'),
-                'forums' => DB::table('forumkopf')->get('name'),
-                'newest_posts' => DB::table(['forumbeitraege', 'forumkopf'])
-                    ->where('forumbeitraege.forum', '=', 'forumkopf.id')
-                    ->order_by('datum', 'desc')
-                    ->limit(20)
-                    ->get([
-                        'forumbeitraege.id',
-                        'forumbeitraege.name',
-                        'forumbeitraege.thema',
-                        'forumbeitraege.datum',
-                        'forumkopf.id as forum_id',
-                        'forumkopf.name as forum_name'
-                    ])
-            ];
+        View::layout('default', ['title' => 'TinyMVC'], function($layout) {
+            $data = ['sub_headline' => 'This text comes from a controller (' . Request::controller() . ')'];
 
-            $layout = str_replace('{{header}}', View::render('header', $data, ['sub_dir' => 'misc']), $layout);
-            $layout = str_replace('{{newest_posts}}', View::render('newest_posts', $data, ['sub_dir' => 'misc']),$layout);
+            $layout = str_replace('{{header}}', View::render('header', null, ['sub_dir' => 'misc']), $layout);
+            $layout = str_replace('{{content}}', View::render('index', $data, ['sub_dir' => 'home']), $layout);
             echo $layout;
         });
-        */
+    }
+
+    public function about() {
+        View::layout('default', ['title' => 'TinyMVC | About'], function($layout) {
+            $data = ['sub_headline' => 'It\'s really easy and super fast and tiny.'];
+
+            $layout = str_replace('{{header}}', View::render('header', null, ['sub_dir' => 'misc']), $layout);
+            $layout = str_replace('{{content}}', View::render('index', $data, ['sub_dir' => 'home']), $layout);
+            echo $layout;
+        });
     }
 
 }
