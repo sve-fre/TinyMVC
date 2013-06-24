@@ -28,7 +28,7 @@ class DB {
             self::$_connection
         ) or die ('Could not select database.');
 
-        //mysql_query("SET CHARACTER SET utf8");
+        mysql_query("SET CHARACTER SET utf8");
 
         self::$_connected = true;
     }
