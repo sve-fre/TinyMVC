@@ -22,4 +22,8 @@ class home {
         });
     }
 
+    public function testroute() {
+        echo 'testroute';
+    }
+
 }
