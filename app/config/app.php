@@ -15,5 +15,6 @@ return array(
     'db_host' => 'localhost',                       // mysql database host name
     'db_user' => 'root',                            // mysql database user name
     'db_password' => '',                            // mysql database password
-    'db_name' => 'selfhtml'                         // mysql database name
+    'db_name' => '',                                // mysql database name
+    'error_controller' => 'error_404'               // controller gets called when Router doesn't find a controller
 );
