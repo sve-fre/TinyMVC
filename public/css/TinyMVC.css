@@ -30,3 +30,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+ul li {
+    display: inline;
+    margin: 0 10px 0 0;
+}

@@ -23,7 +23,23 @@ class home {
     }
 
     public function testroute() {
-        echo 'testroute';
+        View::layout('default', ['title' => 'TinyMVC | TestRoute'], function($layout) {
+            $data = ['sub_headline' => 'It\'s really easy and super fast and tiny.'];
+
+            $layout = str_replace('{{header}}', View::render('header', null, ['sub_dir' => 'misc']), $layout);
+            $layout = str_replace('{{content}}', View::render('testroute', $data, ['sub_dir' => 'misc']), $layout);
+            echo $layout;
+        });
+    }
+
+    public function testroute_asd() {
+        View::layout('default', ['title' => 'TinyMVC | TestRoute ASD'], function($layout) {
+            $data = ['sub_headline' => 'It\'s really easy and super fast and tiny.'];
+
+            $layout = str_replace('{{header}}', View::render('header', null, ['sub_dir' => 'misc']), $layout);
+            $layout = str_replace('{{content}}', View::render('testroute_asd', $data, ['sub_dir' => 'misc']), $layout);
+            echo $layout;
+        });
     }
 
 }

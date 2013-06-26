@@ -2,6 +2,7 @@
 
 class Router {
 
+    private static $_routes = array();
     private static $_skip = false;
 
     public static function register($route, $todo) {
@@ -9,29 +10,19 @@ class Router {
             return;
         }
 
-        if (strpos($todo, '@') !== false) {
-            $todo = explode('@', $todo);
-            $controller = $todo[0];
-            $action = $todo[1];
-            $controller_file = path('controller') . $controller . '.php';
-
-            if (is_readable($controller_file)) {
-                include $controller_file;
-                $controller = new $controller();
-
-                if (method_exists($controller, $action)) {
-                    call_user_func(array($controller, $action));
-
-                    self::$_skip = true;
-                } else {
-                    Router::_error();
-                }
-            } else {
-                Router::_error();
-            }
-        } else {
-            Router::_error();
+        if (in_array($route, self::$_routes)) {
+            return;
         }
+
+        if (!preg_match('/[a-zA-Z0-9_]\@[a-zA-Z0-9_]/', $todo)) {
+            return;
+        }
+
+        $todo = explode('@', $todo);
+        $controller = $todo[0];
+        $action = $todo[1];
+
+        self::$_routes[] = [$route, [$controller, $action]];
     }
 
     private static function _error() {
@@ -51,13 +42,26 @@ class Router {
     }
 
     public static function listen() {
-        if (self::$_skip === true) {
-            return;
+        $routes = self::$_routes;
+
+        if (count($routes)) {
+            foreach ($routes as $route) {
+                if (ltrim(Request::get(), '/') == $route[0]) {
+                    $controller = $route[1][0];
+                    $controller_file = path('controller') . $controller . '.php';
+                    $action = $route[1][1];
+                    self::$_skip = true;
+
+                    break;
+                }
+            }
         }
 
-        $controller = Request::controller();
-        $controller_file = path('controller') . $controller . '.php';
-        $action = Request::action();
+        if (self::$_skip === false) {
+            $controller = Request::controller();
+            $controller_file = path('controller') . $controller . '.php';
+            $action = Request::action();
+        }
 
         if (is_readable($controller_file)) {
             include $controller_file;
