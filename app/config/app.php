@@ -5,6 +5,7 @@ return array(
     'controller_dir' => 'controller',               // within app/ dir
     'model_dir' => 'model',                         // within app/ dir
     'title' => 'My awesome project',                // title of your project
+    'title_separator' => ' | ',                     // used between base title and title
     'base_url' => 'http://localhost/TinyMVC/',      // trailing slash required
     'install_dir' => 'TinyMVC',                     // no slash to start with, and no trailing slash
     'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs

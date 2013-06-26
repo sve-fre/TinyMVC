@@ -58,3 +58,11 @@ function slug($str) {
     $str = trim($str, '-');
     return $str;
 }
+
+function title($title = '') {
+    if (!$title) {
+        return Config::get('app.title');
+    }
+
+    return Config::get('app.title') . Config::get('app.title_separator') . $title;
+}
