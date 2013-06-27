@@ -14,7 +14,7 @@ return array(
 
     'default_controller' => 'home',                 // the controller used, when current URL == Base URL
     'default_action' => 'index',                    // the default method name of a controller, when just http://www.example.com/controller is called
-    'error_controller' => 'error_404'               // controller gets called when Router doesn't find a controller
+    'error_controller' => 'error_404',              // controller gets called when Router doesn't find a controller
     'view_extension' => '.tpl.php',                 // extension of view files, once declared here, you just purely use view's name, when working with views
     'layout_extension' => '.tpl.php',               // extension of layout files, once declared here, you just purely use layout's name, when working with views
 
