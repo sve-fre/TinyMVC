@@ -29,7 +29,7 @@ You have access to your configurations in controllers, models and views via `Con
 
 
 ### Starting point
-If you want to create a controller for the start page (where usually nothings in URL determining a controller, but you wanna load one, though), edit the line containing `'default_controller' => 'home',` and `'default_action' => 'index'` in `app/config/app.php`. The following controller (`app/controller/home.php`) gets loaded, and its method `index()` gets called when there is no controller or when you hit `http:://localhost/tinymvc/home` (assuming you enabled `mod_rewrite` in apps config file, otherwise it would be `http://localhost/tinymvc/index.php?home`).
+If you want to create a controller for the homepage (where usually nothing in the URL determines a specific controller, but you want to load one, though), edit the line containing `'default_controller' => 'home',` and `'default_action' => 'index'` in `app/config/app.php`. The following controller (`app/controller/home.php`) gets loaded, and its method `index()` gets called when you hit `http:://localhost/TinyMVC/` or `http:://localhost/TinyMVC/home` or `http:://localhost/TinyMVC/home/index` (assuming you have `mod_rewrite` enabled by setting it to `true`, otherwise your URLs would look slightly different, with `index.php?` in between your Base URL and you controller, e.g. `http://localhost/TinyMVC/index.php?home/index`). This is how `app/controller/home.php` could look like:
 
     class home {
 
