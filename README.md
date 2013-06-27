@@ -3,14 +3,14 @@ Very tiny PHP 5 MVC tool, with classes like Request, Router, View (with inherita
 
 
 ### Requirements
-Tinymvc needs a webserver running PHP => 5.3.
+TinyMVC needs a webserver running PHP => 5.3.
 
 
 ### Installation
 Just copy all the contents to your webserver.
 We assume you've installed TinyMVC to `/var/www/htdocs/TinyMVC/` and your URL is `http://localhost/TinyMVC/`.
 After copying all files, set up the app's config file in `app/config/app.php`.
-Your `base_url` would be `http://localhost/TinyMVC/` and your `install_dir` would be `TinyMVC` (both case-sensitiv).
+Your `base_url` would be `http://localhost/TinyMVC/` (note the trailing slash) and your `install_dir` would be `TinyMVC` (no slashes and both case-sensitiv).
 
 
 ### Custom configuration
