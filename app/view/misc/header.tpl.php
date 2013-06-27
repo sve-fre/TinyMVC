@@ -9,6 +9,7 @@
             <li><a href="<?php echo url('missing'); ?>">Missing controller</a></li>
             <li><a href="<?php echo url('testroute'); ?>">Testroute</a></li>
             <li><a href="<?php echo url('testroute/asd'); ?>">Testroute ASD</a></li>
+            <li><a href="<?php echo url('home/another_route'); ?>">Testroute ASD</a></li>
         </ul>
     </nav>
 </header>
