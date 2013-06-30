@@ -3,7 +3,7 @@ Very tiny PHP 5 MVC tool, with classes like Request, Router, View (with inherita
 
 
 ### Requirements
-TinyMVC needs a webserver running PHP => 5.3.
+TinyMVC needs a webserver running PHP => 5.4.
 
 
 ### Installation
@@ -17,12 +17,12 @@ Your `base_url` would be `http://localhost/TinyMVC/` (note the trailing slash) a
 You can add items in the existing array in `app/config/app.php` (you can even use mutiple dimensions), or create a new config file simply returning a new anonymous array. E.g. create `myconfig.php` within `app/config/` directory with the following content:
 
     <?php
-        return array(
+        return [
             'title' => 'My awesome config.',
-            'foo' => array(
+            'foo' => [
                 'bar' => 123
-            )
-        );
+            ]
+        ];
     ?>
 
 You have access to your configurations in controllers, models and views via `Config::get('myconfig.title')` and `Config::get('myconfig.foo.bar')`.

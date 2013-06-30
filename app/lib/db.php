@@ -103,7 +103,7 @@ class DB {
             return $output;
 
         } else {
-            return array();
+            return [];
         }
     }
 
@@ -120,7 +120,7 @@ class DB {
 
             return $output;
         } else {
-            return array();
+            return [];
         }
     }
 
