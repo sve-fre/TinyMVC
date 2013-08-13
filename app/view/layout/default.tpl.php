@@ -7,10 +7,10 @@
 </head>
 <body>
     <div id="wrapper">
-        {{header}}
+        <?php echo $header; ?>
 
         <div id="content">
-            {{content}}
+            <?php echo $content; ?>
         </div>
     </div><!-- /#wrapper -->
 </body>
