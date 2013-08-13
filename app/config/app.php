@@ -5,7 +5,7 @@ return [
     'install_dir' => 'TinyMVC',                     // no slash to start with, and no trailing slash
     'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
 
-    'title' => 'My awesome project',                // title of your project
+    'title' => 'My awesome project 123',                // title of your project
     'title_separator' => ' | ',                     // used between base title and title
 
     'view_dir' => 'view',                           // within app/ dir
