@@ -54,9 +54,9 @@ class DB {
     }
 
 
-    public function limit($length, $offset = null) {
-        $length = (int)$length;
-        $offset = (int)$offset;
+    public function limit($one, $two = null) {
+        $length = ($two === null) ? (int)$one : (int)$two;
+        $offset = ($two !== null) ? (int)$one : null;
 
         if ($offset && $length) {
             self::$_limit = "LIMIT {$offset}, {$length}";
@@ -69,6 +69,7 @@ class DB {
 
 
     public function where($column, $operator, $value) {
+        $value = (is_string($value)) ? '"' . $value . '"' : $value;
         self::$_where = 'WHERE ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
