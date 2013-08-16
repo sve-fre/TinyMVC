@@ -76,17 +76,13 @@ function dd() {
     die();
 }
 
-function subdomboolcheck() {
-    $root = $_SERVER['DOCUMENT_ROOT'];
-    $filePath = dirname(dirname(dirname(__FILE__)));
-    echo $root;
-    echo '<br>';
-    echo $filePath;
-    echo '<br>';
+function installedInSubdirectory() {
+    $server_root = $_SERVER['DOCUMENT_ROOT'];
+    $index_dir = dirname(dirname(dirname(__FILE__)));
 
-    if ($root == $filePath) {
-        return false; // installed in the root
-    } else {
-        return true;  // installed in a subfolder or subdomain
+    if ($server_root === $index_dir) {
+        return false;
     }
+
+    return true;
 }

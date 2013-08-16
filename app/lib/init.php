@@ -10,7 +10,7 @@ require_once ABS_PATH . 'app/lib/router.php';
 require_once ABS_PATH . 'app/lib/db.php';
 require_once ABS_PATH . 'app/lib/view.php';
 
-echo subdomboolcheck() ? 1 : 0;
+echo installedInSubdirectory() ? 1 : 0;
 
 Router::register('iwasregistered', 'home@iwasregistered');
 
