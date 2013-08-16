@@ -77,12 +77,21 @@ function dd() {
 }
 
 function installedInSubdirectory() {
-    $server_root = $_SERVER['DOCUMENT_ROOT'];
-    $index_dir = dirname(dirname(dirname(__FILE__)));
-
-    if ($server_root === $index_dir) {
+    if ($_SERVER['DOCUMENT_ROOT'] === Config::get('app.install_dir')) {
         return false;
     }
 
     return true;
+}
+
+function getSubdirectory() {
+    if (!installedInSubdirectory()) {
+        return null;
+    }
+
+    echo Config::get('install_dir');
+    echo '<br>';
+    echo $_SERVER['DOCUMENT_ROOT'];
+
+    return str_replace($_SERVER['DOCUMENT_ROOT'], '', Config::get('install_dir'));
 }

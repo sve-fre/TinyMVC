@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'base_url' => 'http://localhost/TinyMVC/',      // trailing slash required
-    'mod_rewrite' => true,                          // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
+    'base_url' => 'http://localhost/TinyMVC/',            // trailing slash required
+    'mod_rewrite' => true,                                // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
+    'install_dir' => dirname(dirname(dirname(__FILE__))), // installation directory of TinyMVC
 
     'title' => 'My awesome project',                // title of your project
     'title_separator' => ' | ',                     // used between base title and title
