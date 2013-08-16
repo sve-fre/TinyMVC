@@ -10,7 +10,8 @@ require_once ABS_PATH . 'app/lib/router.php';
 require_once ABS_PATH . 'app/lib/db.php';
 require_once ABS_PATH . 'app/lib/view.php';
 
-Router::register('testroute/asd', 'home@testroute_asd');
-Router::register('testroute', 'home@testroute');
+echo subdomboolcheck() ? 1 : 0;
+
+Router::register('iwasregistered', 'home@iwasregistered');
 
 Router::listen();

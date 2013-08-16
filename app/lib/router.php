@@ -37,7 +37,7 @@ class Router {
                 call_user_func(array($controller, Config::get('app.default_action')));
             }
         } else {
-            die('Could not find error controller: <code>' . Config::get('aṕp.error_controller') . '</code>');
+            die('Could not find error controller: <code>' . Config::get('app.error_controller') . '</code>');
         }
     }
 

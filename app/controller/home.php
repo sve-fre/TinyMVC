@@ -3,8 +3,6 @@
 class home {
 
     public function index() {
-        echo Request::get();
-
         $title = title();
         $sub_headline = 'This is a sub headline';
 
@@ -15,6 +13,11 @@ class home {
         ];
 
         View::layout('default', $data);
+    }
+
+
+    public function iwasregistered() {
+        echo 123;
     }
 
 }
