@@ -3,6 +3,8 @@
 class home {
 
     public function index() {
+        echo Request::get();
+
         $title = title();
         $sub_headline = 'This is a sub headline';
 

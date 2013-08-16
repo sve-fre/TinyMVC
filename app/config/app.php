@@ -2,8 +2,7 @@
 
 return [
     'base_url' => 'http://localhost/TinyMVC/',      // trailing slash required
-    'install_dir' => 'TinyMVC',                     // no slash to start with, and no trailing slash
-    'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
+    'mod_rewrite' => true,                          // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
 
     'title' => 'My awesome project',                // title of your project
     'title_separator' => ' | ',                     // used between base title and title
