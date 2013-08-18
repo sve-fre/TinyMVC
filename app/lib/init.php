@@ -9,6 +9,11 @@ require_once ABS_PATH . 'app/lib/request.php';
 require_once ABS_PATH . 'app/lib/router.php';
 require_once ABS_PATH . 'app/lib/db.php';
 require_once ABS_PATH . 'app/lib/view.php';
+require_once ABS_PATH . 'app/lib/plugin.php';
+
+if (Config::get('app.tinymvc_dashboard_url')) {
+    Router::register(Config::get('app.tinymvc_dashboard_url'), 'tinymvc_dashboard@index');
+}
 
 Router::register('iwasregistered', 'home@iwasregistered');
 Router::listen();

@@ -4,6 +4,7 @@ class Config {
 
     private static $cfgs = array();
     private static $loaded = false;
+    // TODO: only one $loaded for many config files?
 
     private static function load() {
         $cfg_dir = ABS_PATH . 'app/config/';
