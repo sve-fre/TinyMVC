@@ -37,14 +37,14 @@ class Plugin {
         if (count($plugins)) {
             foreach (self::$_plugins as $plugin) {
                 $plugin_dir = $plugin['file_path'];
-                $plugin = $plugin_dir . DS . 'plugin.php';
+                $plugin_file = $plugin_dir . DS . 'plugin.php';
 
-                if (!is_readable($plugin_dir) || !is_readable($plugin)) {
-                    self::$_invalid_plugins[] = $plugin;
+                if (!is_readable($plugin_dir) || !is_readable($plugin_file)) {
+                    self::$_invalid_plugins[] = array($plugin, $plugin_file);
                     continue;
                 }
 
-                self::$_valid_plugins[] = $plugin;
+                self::$_valid_plugins[] = array($plugin, $plugin_file);
             }
         }
     }
@@ -62,7 +62,24 @@ class Plugin {
 
 
     public static function call($hook) {
-        print_r(self::$_valid_plugins);
+        $plugins = self::$_valid_plugins;
+        $hook_name = $hook[0];
+        $view_name = $hook[1]['view'];
+        $data = $hook[1]['data'];
+
+        if (count($plugins)) {
+            foreach ($plugins as $plugin) {
+                $plugin_file = $plugin[1];
+                $plugin_name = $plugin[0]['file_name'];
+                include_once $plugin_file;
+
+                $call_function = $plugin[0]['file_name'] . '__' . $hook_name;
+
+                if (function_exists($call_function)) {
+                    $call_function($view_name, $data);
+                }
+            }
+        }
     }
 
 }
