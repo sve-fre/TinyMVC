@@ -46,7 +46,7 @@ class DB {
     }
 
 
-    public function order_by($order_by_column, $direction = null) {
+    public function orderBy($order_by_column, $direction = null) {
         self::$_order_by_column  = '`' . $order_by_column . '`';
         self::$_direction = ($direction) ? strtoupper($direction) : 'ASC';
 

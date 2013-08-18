@@ -3,7 +3,7 @@
 class Request {
 
     public static function get() {
-        $install_dir = (installedInSubdirectory()) ? getSubdirectory() : '';
+        $install_dir = (App::installedInSubdirectory()) ? App::getSubdirectory() : '';
         $req = ltrim($_SERVER['REQUEST_URI'], DS);
 
         if (!Config::get('app.mod_rewrite')) {
