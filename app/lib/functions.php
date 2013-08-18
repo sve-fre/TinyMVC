@@ -24,6 +24,9 @@ function path($path = '') {
         case 'view':
             return path('app') . Config::get('app.view_dir') . DS;
             break;
+        case 'plugin':
+            return path('app') . Config::get('app.plugin_dir') . DS;
+            break;
         default:
             return ABS_PATH;
     }
@@ -85,4 +88,31 @@ function getSubdirectory() {
     }
 
     return trim(substr(Config::get('app.install_dir'), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
+}
+
+function listFiles($dir, $callback = null) {
+    if (!is_readable($dir)) {
+        return false;
+    }
+
+    $result = array();
+    $i = 0;
+
+    if ($handle = opendir($dir)) {
+        while (false !== ($file = readdir($handle))) {
+            if ($file != '.' && $file != '..') {
+                $result[$i]['file_name'] = $file;
+                $result[$i]['file_path'] = $dir . $file;
+            }
+
+            $i++;
+        }
+        closedir($handle);
+
+        if ($callback) {
+            $callback($result);
+        }
+    }
+
+    return (!count($result)) ? false : $result;
 }

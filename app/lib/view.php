@@ -18,7 +18,7 @@ class View {
         $view = $view_dir . $view . Config::get('app.view_extension');
 
         if (!is_readable($view)) {
-            echo 'View <code>' . $view . '</code> is not readable or does not exist';
+            return 'View <code>' . $view . '</code> is not readable or does not exist';
         } else {
             if ($data !== null && is_array($data)) {
                 extract($data);
@@ -53,15 +53,15 @@ class View {
         $layout = path('view') . 'layout' . DS . $layout . Config::get('app.layout_extension');
 
         if (!is_readable($layout)) {
-            echo 'Layout <code>' . $layout . '</code> is not readable or does not exist';
+            return 'Layout <code>' . $layout . '</code> is not readable or does not exist';
         } else {
             if ($data !== null && is_array($data)) {
                 extract($data);
             }
 
             ob_start();
-            include $layout;
-            $output = ob_get_contents();
+                include $layout;
+                $output = ob_get_contents();
             ob_end_clean();
 
             if ($callback) {

@@ -5,12 +5,13 @@ return array(
     'mod_rewrite' => true,                                // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
     'install_dir' => dirname(dirname(dirname(__FILE__))), // installation directory of TinyMVC
 
-    'title' => 'My awesome project',                // title of your project
+    'title' => 'TinyMVC',                // title of your project
     'title_separator' => ' | ',                     // used between base title and title
 
     'view_dir' => 'view',                           // within app/ dir
     'controller_dir' => 'controller',               // within app/ dir
     'model_dir' => 'model',                         // within app/ dir
+    'plugin_dir' => 'plugins',                      // within app/ dir
 
     'default_controller' => 'home',                 // the controller used, when current URL == Base URL
     'default_action' => 'index',                    // the default method name of a controller, when just http://www.example.com/controller is called
@@ -22,5 +23,7 @@ return array(
     'db_user' => 'root',                            // mysql database user name
     'db_password' => '',                            // mysql database password
     'db_name' => '',                                // mysql database name
-    'tinymvc_dashboard_url' => 'f06896dbbcb775c1a28055641601cf0c', // TinyMVC dashboard
+    'tinymvc_dashboard_url' => 'f06896dbbcb775c1a28055641601cf0c', // TinyMVC dashboard'
+
+    'enable_plugins' => true,                       // enable plugins?
 );
