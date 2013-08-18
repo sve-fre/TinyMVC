@@ -42,6 +42,8 @@ class Plugin {
                     self::$_invalid_plugins[] = $plugin;
                     continue;
                 }
+
+
             }
         }
     }
