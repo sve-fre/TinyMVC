@@ -11,7 +11,7 @@ return array(
     'view_dir' => 'view',                           // within app/ dir
     'controller_dir' => 'controller',               // within app/ dir
     'model_dir' => 'model',                         // within app/ dir
-    'plugin_dir' => 'plugins',                      // within app/ dir
+    'plugin_dir' => 'plugin',                       // within app/ dir
 
     'default_controller' => 'home',                 // the controller used, when current URL == Base URL
     'default_action' => 'index',                    // the default method name of a controller, when just http://www.example.com/controller is called

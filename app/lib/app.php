@@ -10,7 +10,7 @@ class App {
         }
 
         if (Config::get('app.enable_plugins')) {
-            Plugin::getPlugins();
+            Plugin::init();
         }
     }
 

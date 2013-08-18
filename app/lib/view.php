@@ -12,6 +12,8 @@ class View {
      * @return The buffered view, or the included view (depending on 'buffer' configuration, passes 3rd as arguments)
      */
     public static function render($view, $data = null, $config = null) {
+        Plugin::registerHook('view_render', array('view' => $view, 'data' => $data));
+
         $view_dir = (isset($config) && array_key_exists('sub_dir', $config)) ? path('view') . $config['sub_dir'] . DS : path('view');
         $buffer = (isset($config) && array_key_exists('buffer', $config)) ? (($config['buffer'] === true) ? true : false) : true;
 

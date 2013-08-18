@@ -5,13 +5,16 @@ class Plugin {
     private static $_hooks = array();
     private static $_plugins = array();
     private static $_invalid_plugins = array();
+    private static $_valid_plugins = array();
 
 
-    public static function getPlugins() {
-        if (!Config::get('app.plugin_dir')) {
-            return;
-        }
+    public static function init() {
+        self::get();
+        self::validate();
+    }
 
+
+    public static function get() {
         $plugin_dir = path('plugin');
 
         if (!is_readable($plugin_dir)) {
@@ -25,12 +28,10 @@ class Plugin {
                 }
             }
         });
-
-        return self::$_plugins;
     }
 
 
-    public static function check() {
+    public static function validate() {
         $plugins = self::$_plugins;
 
         if (count($plugins)) {
@@ -38,19 +39,30 @@ class Plugin {
                 $plugin_dir = $plugin['file_path'];
                 $plugin = $plugin_dir . DS . 'plugin.php';
 
-                if (is_readable($plugin_dir) || !is_readable($plugin)) {
+                if (!is_readable($plugin_dir) || !is_readable($plugin)) {
                     self::$_invalid_plugins[] = $plugin;
                     continue;
                 }
 
-
+                self::$_valid_plugins[] = $plugin;
             }
         }
     }
 
 
-    public function registerHook($hook, $data) {
+    public static function registerHook($hook, $data = null) {
+        if (!$data) {
+            self::$_hooks[] = $hook;
+        }
 
+        $hook = array($hook, $data);
+        self::$_hooks[] = $hook;
+        self::call($hook);
+    }
+
+
+    public static function call($hook) {
+        print_r(self::$_valid_plugins);
     }
 
 }

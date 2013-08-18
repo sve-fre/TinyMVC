@@ -15,3 +15,4 @@ function __autoload($class) {
 
 App::init();
 Router::listen();
+//d(Plugin::$_hooks);

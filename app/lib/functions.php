@@ -68,11 +68,12 @@ function title($title = '') {
     return $title . Config::get('app.title_separator') . Config::get('app.title');
 }
 
-function dd() {
+function d() {
     array_map(
         function($x) {
+            echo "<pre>";
             var_dump($x);
+            echo "</pre>";
         }, func_get_args()
     );
-    die();
 }

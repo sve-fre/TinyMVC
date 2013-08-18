@@ -28,4 +28,5 @@ class File {
 
         return (!count($result)) ? false : $result;
     }
+
 }
