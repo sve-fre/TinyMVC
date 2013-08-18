@@ -3,18 +3,18 @@
 class Request {
 
     public static function get() {
-        $install_dir = Config::get('app.install_dir');
-        $req = $_SERVER['REQUEST_URI'];
+        $install_dir = (installedInSubdirectory()) ? getSubdirectory() : '';
+        $req = ltrim($_SERVER['REQUEST_URI'], DS);
 
-        if (Config::get('app.mod_rewrite') === true) {
-            return str_replace($install_dir, '', ltrim($req, DS));
+        if (!Config::get('app.mod_rewrite')) {
+            $req = str_replace(
+                array('index.php', 'index.php?'),
+                array('', ''),
+                $req
+            );
         }
 
-        if (strpos($req, 'index.php?') !== false) {
-            return str_replace($install_dir, '', str_replace('index.php?', '', ltrim($req, DS)));
-        } elseif (strpos($req, 'index.php') !== false) {
-            return str_replace($install_dir, '', str_replace('index.php', '', ltrim($req, DS)));
-        }
+        return str_replace($install_dir, '', $req);
     }
 
     public static function controller() {
@@ -36,7 +36,7 @@ class Request {
         if (isset($request) && is_array($request) && count($request)) {
             return $request;
         } else {
-            return [];
+            return array();
         }
     }
 

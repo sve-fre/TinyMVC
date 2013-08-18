@@ -40,22 +40,17 @@ function url($url = '') {
 }
 
 function slug($str) {
-    if (!$str) {
-        return;
-    }
     $str = mb_strtolower(trim($str));
     $str = strip_tags($str);
-    $str = str_replace('ä', 'ae', $str);
-    $str = str_replace('ü', 'ue', $str);
-    $str = str_replace('ö', 'oe', $str);
-    $str = str_replace('ß', 'ss', $str);
-    $str = str_replace('è', 'e', $str);
-    $str = str_replace('é', 'e', $str);
-    $str = str_replace('á', 'a', $str);
-    $str = str_replace('à', 'a', $str);
+
+    $find = array('ä', 'á', 'à', 'ü', 'ö', 'ß', 'é', 'è');
+    $replace = array('ae', 'a', 'a', 'ue', 'oe', 'e', 'e');
+    $str = str_replace($find, $replace, $str);
+
     $str = preg_replace('/[^a-z0-9-]/', '-', $str);
     $str = preg_replace('/-+/', '-', $str);
     $str = trim($str, '-');
+
     return $str;
 }
 
@@ -64,7 +59,7 @@ function title($title = '') {
         return Config::get('app.title');
     }
 
-    return Config::get('app.title') . Config::get('app.title_separator') . $title;
+    return $title . Config::get('app.title_separator') . Config::get('app.title');
 }
 
 function dd() {
@@ -86,12 +81,8 @@ function installedInSubdirectory() {
 
 function getSubdirectory() {
     if (!installedInSubdirectory()) {
-        return null;
+        return false;
     }
 
-    echo Config::get('install_dir');
-    echo '<br>';
-    echo $_SERVER['DOCUMENT_ROOT'];
-
-    return str_replace($_SERVER['DOCUMENT_ROOT'], '', Config::get('install_dir'));
+    return trim(substr(Config::get('app.install_dir'), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
 }

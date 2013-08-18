@@ -10,8 +10,5 @@ require_once ABS_PATH . 'app/lib/router.php';
 require_once ABS_PATH . 'app/lib/db.php';
 require_once ABS_PATH . 'app/lib/view.php';
 
-var_dump(getSubdirectory());
-
 Router::register('iwasregistered', 'home@iwasregistered');
-
 Router::listen();
