@@ -18,7 +18,7 @@ class Plugin {
             return;
         }
 
-        listFiles($plugin_dir, function($files) {
+        File::get($plugin_dir, function($files) {
             if ($files && count($files)) {
                 foreach ($files as $key => $file) {
                     self::$_plugins[] = $file;
