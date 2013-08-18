@@ -5,6 +5,7 @@ class Router {
     private static $_routes = array();
     private static $_skip = false;
 
+
     public static function register($route, $todo) {
         if (!$route) {
             return;
@@ -25,6 +26,7 @@ class Router {
         self::$_routes[] = array($route, array($controller, $action));
     }
 
+
     private static function _error() {
         $error_404 = Config::get('app.error_controller');
         $error_404_file = path('controller') . $error_404 . '.php';
@@ -40,6 +42,7 @@ class Router {
             die('Could not find error controller: <code>' . Config::get('app.error_controller') . '</code>');
         }
     }
+
 
     public static function listen() {
         $routes = self::$_routes;

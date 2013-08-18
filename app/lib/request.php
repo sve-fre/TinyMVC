@@ -8,7 +8,7 @@ class Request {
 
         if (!Config::get('app.mod_rewrite')) {
             $req = str_replace(
-                array('index.php', 'index.php?'),
+                array('index.php?', 'index.php'),
                 array('', ''),
                 $req
             );
@@ -17,17 +17,20 @@ class Request {
         return str_replace($install_dir, '', $req);
     }
 
+
     public static function controller() {
         $request = explode('/', self::get());
 
         return (empty($request[1])) ? Config::get('app.default_controller') : $request[1];
     }
 
+
     public static function action() {
         $request = explode('/', self::get());
 
         return (!isset($request[2])) ? Config::get('app.default_action') : $request[2];
     }
+
 
     public static function segments() {
         $request = explode('/', self::get());
@@ -39,6 +42,7 @@ class Request {
             return array();
         }
     }
+
 
     public static function segment($segment) {
         $segment = ($segment < 1) ? 1 : (int)$segment - 1;
