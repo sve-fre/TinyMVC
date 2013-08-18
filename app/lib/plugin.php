@@ -64,8 +64,8 @@ class Plugin {
     public static function call($hook) {
         $plugins = self::$_valid_plugins;
         $hook_name = $hook[0];
-        $view_name = $hook[1]['view'];
-        $data = $hook[1]['data'];
+        $view_name = $hook[1][0];
+        $data = $hook[1][0];
 
         if (count($plugins)) {
             foreach ($plugins as $plugin) {

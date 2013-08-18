@@ -12,7 +12,7 @@ class View {
      * @return The buffered view, or the included view (depending on 'buffer' configuration, passes 3rd as arguments)
      */
     public static function render($view, $data = null, $config = null) {
-        Plugin::registerHook('view_render', array('view' => $view, 'data' => $data));
+        Plugin::registerHook('view_render', array($view, $data));
 
         $view_dir = (isset($config) && array_key_exists('sub_dir', $config)) ? path('view') . $config['sub_dir'] . DS : path('view');
         $buffer = (isset($config) && array_key_exists('buffer', $config)) ? (($config['buffer'] === true) ? true : false) : true;
@@ -52,6 +52,7 @@ class View {
             return;
         }
 
+        Plugin::registerHook('view_layout', array($layout, $data));
         $layout = path('view') . 'layout' . DS . $layout . Config::get('app.layout_extension');
 
         if (!is_readable($layout)) {
