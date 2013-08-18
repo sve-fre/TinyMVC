@@ -1,9 +1,10 @@
+/*
 # TinyMVC
 Very tiny PHP 5 MVC tool, with classes like Request, Router, View (with inheritance), clean URLs (optional) and Database. Inspired by the awesome Laravel PHP Framework.
 
 
 ### Requirements
-TinyMVC needs a webserver running PHP => 5.4.
+TinyMVC needs a webserver running PHP => 5.3.
 
 
 ### Installation
@@ -44,3 +45,4 @@ You should see "Hello World" in your browser.
 
 ### Views & Layouts
 tba
+*/

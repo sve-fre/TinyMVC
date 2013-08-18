@@ -104,7 +104,7 @@ class DB {
             return $output;
 
         } else {
-            return [];
+            return array();
         }
     }
 
@@ -121,7 +121,7 @@ class DB {
 
             return $output;
         } else {
-            return [];
+            return array();
         }
     }
 
