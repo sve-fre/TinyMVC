@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once ABS_PATH . 'app/lib/functions.php';
 
 function __autoload($class) {
-    $class = ABS_PATH . 'app/lib/' . strtolower($class) . '.php';
+    $class = path('lib') . strtolower($class) . '.php';
 
     if (!is_readable($class)) {
         return;
@@ -23,6 +23,6 @@ if (Config::get('app.enable_plugins')) {
     Plugin::getPlugins();
 }
 
-require_once ABS_PATH . 'app/lib/routes.php';
+require_once path('lib') . 'routes.php';
 
 Router::listen();
