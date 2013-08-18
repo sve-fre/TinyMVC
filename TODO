@@ -1,5 +1,0 @@
-<sfm> 2013-06-23:
-- update README.md
-- create "Asset" class or something that makes it more convenient to link to asset files (CSS, JS etc.)
-- create a simple caching mechanism
-- find a better (more easy) solution for replacing placeholders with renderable content within views
