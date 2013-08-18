@@ -23,5 +23,6 @@ if (Config::get('app.enable_plugins')) {
     Plugin::getPlugins();
 }
 
-Router::register('iwasregistered', 'home@iwasregistered');
+require_once ABS_PATH . 'app/lib/routes.php';
+
 Router::listen();
