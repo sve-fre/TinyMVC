@@ -1,9 +1,7 @@
 <?php
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require_once ABS_PATH . 'app/lib/functions.php';
+require_once path('lib') . 'routes.php';
 
 function __autoload($class) {
     $class = path('lib') . strtolower($class) . '.php';
@@ -15,14 +13,5 @@ function __autoload($class) {
     require_once $class;
 }
 
-if (Config::get('app.tinymvc_dashboard_url')) {
-    Router::register(Config::get('app.tinymvc_dashboard_url'), 'tinymvc_dashboard@index');
-}
-
-if (Config::get('app.enable_plugins')) {
-    Plugin::getPlugins();
-}
-
-require_once path('lib') . 'routes.php';
-
+App::init();
 Router::listen();

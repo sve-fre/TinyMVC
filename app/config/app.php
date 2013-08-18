@@ -26,4 +26,5 @@ return array(
     'tinymvc_dashboard_url' => 'f06896dbbcb775c1a28055641601cf0c', // TinyMVC dashboard'
 
     'enable_plugins' => true,                       // enable plugins?
+    'workmode' => 'dev',                            // (dev|live) set error displays
 );
