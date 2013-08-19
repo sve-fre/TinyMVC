@@ -14,6 +14,7 @@ class App {
         }
     }
 
+
     public static function setWorkMode($workmode) {
         switch ($workmode) {
             case 'dev':
@@ -30,6 +31,7 @@ class App {
                 break;
         }
     }
+
 
     public static function installedInSubdirectory() {
         if ($_SERVER['DOCUMENT_ROOT'] === Config::get('app.install_dir')) {

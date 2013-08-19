@@ -6,6 +6,7 @@ class Config {
     private static $loaded = false;
     // TODO: only one $loaded for many config files?
 
+
     private static function load() {
         $cfg_dir = ABS_PATH . 'app/config/';
 
@@ -23,6 +24,7 @@ class Config {
             self::$loaded = true;
         }
     }
+
 
     public static function get($item = null) {
         if (!isset($item)) {

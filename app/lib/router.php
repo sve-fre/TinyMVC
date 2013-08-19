@@ -4,18 +4,28 @@ class Router {
 
     private static $_routes = array();
     private static $_skip = false;
+    private static $_callback = false;
+
+
+    public static function route($route, $callback) {
+        if ($route === ltrim(Request::get(), DS)) {
+            App::init();
+            self::$_callback = true;
+            $callback();
+        }
+    }
 
 
     public static function register($route, $todo) {
-        if (!$route) {
+        if (is_callable($todo)) {
+            $todo();
+
             return;
         }
 
-        if (in_array($route, self::$_routes)) {
-            return;
-        }
+        if (in_array($route, self::$_routes) ||
+            !preg_match('/[a-zA-Z0-9_]\@[a-zA-Z0-9_]/', $todo)) {
 
-        if (!preg_match('/[a-zA-Z0-9_]\@[a-zA-Z0-9_]/', $todo)) {
             return;
         }
 
@@ -45,6 +55,10 @@ class Router {
 
 
     public static function listen() {
+        if (self::$_callback) {
+            return;
+        }
+
         $routes = self::$_routes;
 
         if (count($routes)) {

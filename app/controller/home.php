@@ -17,7 +17,7 @@ class home {
 
 
     public function about() {
-        $title = title();
+        $title = title('About');
         $sub_headline = 'This comes from home@about';
 
         $data = array(
@@ -30,9 +30,9 @@ class home {
     }
 
 
-    public function iwasregistered() {
-        $title = title();
-        $sub_headline = 'This was registered in <code>init.php</code> via <code>Router::register(\'iwasregistered\', \'home@iwasregistered\');</code>';
+    public function registered_route() {
+        $title = title('Registered route');
+        $sub_headline = 'This was registered in <code>init.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>';
 
         $data = array(
             'title' => $title,
