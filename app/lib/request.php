@@ -38,9 +38,9 @@ class Request {
 
         if (isset($request) && is_array($request) && count($request)) {
             return $request;
-        } else {
-            return array();
         }
+
+        return array();
     }
 
 
