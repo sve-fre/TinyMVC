@@ -1,11 +1,9 @@
 <?php
 
-function canonical_element__view_render($view, $data) {
-    echo 'canonical_element__plugin() was called';
-    d($view);
-    d($data);
-}
+function canonical_element__view_render($view, &$data) {
+    if ($view == 'index') {
+        $plugin_data = array(1, 2, 3, 4, 5, 6);
 
-function canonical_element__view_layout($layout, $data) {
-    echo 'canonical_element__view_layout() was called';
+        return $plugin_data;
+    }
 }

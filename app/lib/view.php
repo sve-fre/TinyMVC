@@ -67,7 +67,7 @@ class View {
                 $output = ob_get_contents();
             ob_end_clean();
 
-            if ($callback) {
+            if ($callback && is_callable($callback)) {
                 $callback($output, $data);
             } else {
                 echo $output;
