@@ -21,7 +21,7 @@ class File {
             }
             closedir($handle);
 
-            if ($callback) {
+            if ($callback && is_callable($callback)) {
                 $callback($result);
             }
         }
