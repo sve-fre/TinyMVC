@@ -1,6 +1,6 @@
 <?php
 
-class home {
+class home extends base_controller {
 
     public function index() {
         $title = title();
@@ -12,7 +12,7 @@ class home {
             'content' => View::render('index', array('sub_headline' => $sub_headline), array('sub_dir' => 'home'))
         );
 
-        View::layout('default', $data);
+        View::layout(self::$layout, $data);
     }
 
 
@@ -26,7 +26,7 @@ class home {
             'content' => View::render('index', array('sub_headline' => $sub_headline), array('sub_dir' => 'home'))
         );
 
-        View::layout('default', $data);
+        View::layout(self::$layout, $data);
     }
 
 
@@ -40,7 +40,7 @@ class home {
             'content' => View::render('index', array('sub_headline' => $sub_headline), array('sub_dir' => 'home'))
         );
 
-        View::layout('default', $data);
+        View::layout(self::$layout, $data);
     }
 
 }
