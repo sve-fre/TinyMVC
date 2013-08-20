@@ -1,7 +1,5 @@
 <?php
 
-mb_internal_encoding("UTF-8");
-
 function path($path = '') {
     if (!$path) {
         return ABS_PATH;

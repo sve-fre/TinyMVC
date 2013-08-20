@@ -12,6 +12,8 @@ class App {
         if (Config::get('app.enable_plugins')) {
             Plugin::init();
         }
+
+        mb_internal_encoding("UTF-8");
     }
 
 
