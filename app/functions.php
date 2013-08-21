@@ -69,9 +69,9 @@ function title($title = '') {
 function d() {
     array_map(
         function($x) {
-            echo "<pre>";
+            echo '<pre style="font-family: monospace; margin: 1em; padding: .5em; border: 1px solid #ddd; background-color: #fff; color: #000;">';
             var_dump($x);
-            echo "</pre>";
+            echo '</pre>';
         }, func_get_args()
     );
 }
