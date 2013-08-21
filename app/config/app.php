@@ -23,8 +23,9 @@ return array(
     'db_user' => 'root',                            // mysql database user name
     'db_password' => '',                            // mysql database password
     'db_name' => '',                                // mysql database name
-    'tinymvc_dashboard_url' => 'f06896dbbcb775c1a28055641601cf0c', // TinyMVC dashboard'
+    'tinymvc_dashboard_url' => 'topsecret',         // TinyMVC dashboard'
 
     'enable_plugins' => true,                       // enable plugins?
     'workmode' => 'dev',                            // (dev|live) set error displays
+    'mb_internal_encoding' => 'UTF-8',              // set encoding for internal PHP functions
 );

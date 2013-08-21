@@ -3,7 +3,7 @@
 class tinymvc_dashboard {
 
     public function index() {
-        Plugin::check();
+        d(Plugin::getPlugins());
     }
 
 }

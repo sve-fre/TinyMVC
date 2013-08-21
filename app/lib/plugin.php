@@ -9,19 +9,19 @@ class Plugin {
 
 
     public static function init() {
-        self::get();
+        self::searchPlugins();
         self::validate();
     }
 
 
-    public static function get() {
+    public static function searchPlugins() {
         $plugin_dir = path('plugin');
 
         if (!is_readable($plugin_dir)) {
             return;
         }
 
-        File::get($plugin_dir, function($files) {
+        File::readDir($plugin_dir, function($files) {
             if ($files && count($files)) {
                 foreach ($files as $key => $file) {
                     self::$_plugins[] = $file;
@@ -80,6 +80,11 @@ class Plugin {
                 }
             }
         }
+    }
+
+
+    public static function getPlugins() {
+        return self::$_valid_plugins;
     }
 
 }

@@ -2,7 +2,7 @@
 
 class File {
 
-    public static function get($dir, $callback = null) {
+    public static function readDir($dir, $callback = null) {
         if (!is_readable($dir)) {
             return false;
         }
