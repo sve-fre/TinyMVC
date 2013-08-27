@@ -40,6 +40,16 @@ class App {
     }
 
 
+    public static function backtick($value) {
+        return (is_string($value) && strpos($value, '.') === false) ? '`' . $value . '`' : $value;
+    }
+
+
+    public static function quote($value) {
+        return (is_string($value)) ? '"' . $value . '"' : $value;
+    }
+
+
     public static function installedInSubdirectory() {
         if ($_SERVER['DOCUMENT_ROOT'] === Config::get('app.install_dir')) {
             return false;

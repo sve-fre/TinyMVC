@@ -49,7 +49,7 @@ class DB {
 
 
     public function orderBy($order_by_column, $direction = null) {
-        self::$_order_by_column  = '`' . $order_by_column . '`';
+        self::$_order_by_column  = App::backtick($order_by_column);
         self::$_direction = ($direction) ? strtoupper($direction) : 'ASC';
 
         return $this;
@@ -71,8 +71,7 @@ class DB {
 
 
     public function where($column, $operator, $value) {
-        $value = App::protect($value);
-        $value = (is_string($value)) ? '"' . $value . '"' : $value;
+        $value = App::quote(App::protect($value));
         self::$_where = 'WHERE ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
@@ -80,8 +79,7 @@ class DB {
 
 
     public function orWhere($column, $operator, $value) {
-        $value = App::protect($value);
-        $value = (is_string($value)) ? '"' . $value . '"' : $value;
+        $value = App::quote(App::protect($value));
         self::$_or_where[] = 'OR ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
@@ -89,34 +87,50 @@ class DB {
 
 
     public function andWhere($column, $operator, $value) {
-        $value = App::protect($value);
-        $value = (is_string($value)) ? '"' . $value . '"' : $value;
+        $value = App::quote(App::protect($value));
         self::$_and_where[] = ' AND ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
     }
 
 
-    public function get($columns = null) {
-        $table = self::$_table;
-        $order_by_column = self::$_order_by_column;
-        $direction = self::$_direction;
-        $order_by = (self::$_order_by_column !== null) ? "ORDER BY {$order_by_column} {$direction}" : '';
-        $limit = (self::$_limit !== null) ? self::$_limit : '';
-        $where = (self::$_where !== null) ? self::$_where : '';
-        $or_where = (count(self::$_or_where)) ? implode(' ', self::$_or_where) : '';
-        $and_where = (count(self::$_and_where)) ? implode(' ', self::$_and_where) : '';
+    public function prepare($columns = null) {
+        $sql = array();
+        $sql['table'] = App::backtick(self::$_table);
+        $sql['order_by_column'] = $order_by_column = self::$_order_by_column;
+        $sql['direction'] = $direction = self::$_direction;
+        $sql['order_by'] = (self::$_order_by_column !== null) ? "ORDER BY {$order_by_column} {$direction}" : '';
+        $sql['limit'] = (self::$_limit !== null) ? self::$_limit : '';
+        $sql['where'] = (self::$_where !== null) ? self::$_where : '';
+        $sql['or_where'] = (count(self::$_or_where)) ? implode(' ', self::$_or_where) : '';
+        $sql['and_where'] = (count(self::$_and_where)) ? implode(' ', self::$_and_where) : '';
 
         if (!$columns) {
-            $columns = '*';
+            $sql['columns'] = '*';
         } else {
             if (is_array($columns)) {
-                $columns = array_map(function($item) { return '`' . $item . '`'; } , $columns);
-                $columns = implode(',', $columns);
+                $columns = array_map(function($item) {
+                    return App::backtick($item);
+                } , $columns);
+                $sql['columns'] = implode(',', $columns);
             } else {
-                $columns = '`' . $columns . '`';
+                $sql['columns'] = App::backtick($columns);
             }
         }
+
+        return $sql;
+    }
+
+
+    public function get($columns = null) {
+        $sql = self::prepare($columns);
+        $columns = $sql['columns'];
+        $table = $sql['table'];
+        $where = $sql['where'];
+        $or_where = $sql['or_where'];
+        $and_where = $sql['and_where'];
+        $order_by = $sql['order_by'];
+        $limit = $sql['limit'];
 
         $query = trim("SELECT {$columns} FROM {$table} {$where} {$or_where} {$and_where} {$order_by} {$limit}");
         $query = mysql_query($query);
@@ -125,11 +139,31 @@ class DB {
             while ($row = mysql_fetch_assoc($query)) {
                 $output[] = $row;
             }
-            return $output;
 
+            return $output;
         } else {
             return array();
         }
+    }
+
+
+    public function update($update = array()) {
+        $sql = self::prepare();
+        $table = $sql['table'];
+        $where = $sql['where'];
+        $or_where = $sql['or_where'];
+        $and_where = $sql['and_where'];
+        $limit = $sql['limit'];
+        $tmp = array();
+
+        foreach ($update as $key => $value) {
+            $value = App::quote(App::protect($value));
+            $tmp[] = App::backtick($key) . ' = ' . $value;
+        }
+
+        $sql = implode(', ', $tmp);
+        $query = trim("UPDATE {$table} SET {$sql} {$where} {$or_where} {$and_where} {$limit}");
+        mysql_query($query);
     }
 
 
