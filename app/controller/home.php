@@ -32,7 +32,7 @@ class home extends base_controller {
 
     public function registered_route() {
         $title = title('Registered route');
-        $sub_headline = 'This was registered in <code>init.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>';
+        $sub_headline = 'This was registered in <code>routes.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>';
 
         $data = array(
             'title' => $title,
