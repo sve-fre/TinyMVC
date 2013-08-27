@@ -181,6 +181,24 @@ class DB {
     }
 
 
+    public function insert($insert = array()) {
+        $sql = self::prepare();
+        $table = $sql['table'];
+        $columns = array();
+        $values = array();
+
+        foreach ($insert as $key => $value) {
+            $columns[] = backtick($key);
+            $values[] = quote(protect($value));
+        }
+
+        $insert = '(' . implode(', ', $columns) . ') VALUES (' . implode(', ', $values) . ')';
+
+        $query = trim("INSERT INTO {$table} {$insert}");
+        mysql_query($query);
+    }
+
+
     public static function raw($query) {
         DB::connect();
 
