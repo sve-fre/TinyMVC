@@ -184,6 +184,14 @@ class DB {
     public static function raw($query) {
         DB::connect();
 
+        $instruction = explode(' ', $query);
+        $instruction = strtoupper($instruction[0]);
+        $return_resource = array('SELECT', 'SHOW', 'DESCRIBE', 'EXPLAIN');
+
+        if (!in_array($instruction, $return_resource)) {
+            return mysql_query($query);
+        }
+
         $query = mysql_query($query);
 
         if (mysql_num_rows($query)) {
