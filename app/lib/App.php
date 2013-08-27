@@ -35,6 +35,11 @@ class App {
     }
 
 
+    public static function protect($str) {
+        return mysql_real_escape_string(strip_tags(trim($str)));
+    }
+
+
     public static function installedInSubdirectory() {
         if ($_SERVER['DOCUMENT_ROOT'] === Config::get('app.install_dir')) {
             return false;

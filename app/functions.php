@@ -69,7 +69,7 @@ function title($title = '') {
 function d() {
     array_map(
         function($x) {
-            echo '<pre style="font-family: monospace; margin: 1em; padding: .5em; border: 1px solid #ddd; background-color: #fff; color: #000;">';
+            echo '<pre style="font-family: monospace; margin: 1em; padding: .5em; border: 1px solid #ddd; background-color: #fff; color: #000; overflow: auto;">';
             var_dump($x);
             echo '</pre>';
         }, func_get_args()
