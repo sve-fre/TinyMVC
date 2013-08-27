@@ -167,6 +167,20 @@ class DB {
     }
 
 
+    public function delete() {
+        $sql = self::prepare();
+        $table = $sql['table'];
+        $where = $sql['where'];
+        $or_where = $sql['or_where'];
+        $and_where = $sql['and_where'];
+        $limit = $sql['limit'];
+        $tmp = array();
+
+        $query = trim("DELETE FROM {$table} {$where} {$or_where} {$and_where} {$limit}");
+        mysql_query($query);
+    }
+
+
     public static function raw($query) {
         DB::connect();
 

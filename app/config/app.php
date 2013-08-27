@@ -6,7 +6,7 @@ return array(
     'install_dir' => dirname(dirname(dirname(__FILE__))), // installation directory of TinyMVC
 
     'title' => 'TinyMVC',                           // title of your project
-    'title_separator' => ' | ',                     // used between base title and title
+    'title_separator' => ' | ',                     // used between base title and page title
 
     'view_dir' => 'view',                           // within app/ dir
     'controller_dir' => 'controller',               // within app/ dir
