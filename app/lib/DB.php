@@ -10,6 +10,8 @@ class DB {
     private static $_direction = null;
     private static $_limit = null;
     private static $_where = null;
+    private static $_or_where = array();
+    private static $_and_where = array();
 
 
     public static function connect() {
@@ -69,8 +71,27 @@ class DB {
 
 
     public function where($column, $operator, $value) {
+        $value = App::protect($value);
         $value = (is_string($value)) ? '"' . $value . '"' : $value;
         self::$_where = 'WHERE ' . $column . ' ' . $operator . ' ' . $value;
+
+        return $this;
+    }
+
+
+    public function orWhere($column, $operator, $value) {
+        $value = App::protect($value);
+        $value = (is_string($value)) ? '"' . $value . '"' : $value;
+        self::$_or_where[] = 'OR ' . $column . ' ' . $operator . ' ' . $value;
+
+        return $this;
+    }
+
+
+    public function andWhere($column, $operator, $value) {
+        $value = App::protect($value);
+        $value = (is_string($value)) ? '"' . $value . '"' : $value;
+        self::$_and_where[] = ' AND ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
     }
@@ -83,18 +104,21 @@ class DB {
         $order_by = (self::$_order_by_column !== null) ? "ORDER BY {$order_by_column} {$direction}" : '';
         $limit = (self::$_limit !== null) ? self::$_limit : '';
         $where = (self::$_where !== null) ? self::$_where : '';
+        $or_where = (count(self::$_or_where)) ? implode(' ', self::$_or_where) : '';
+        $and_where = (count(self::$_and_where)) ? implode(' ', self::$_and_where) : '';
 
         if (!$columns) {
             $columns = '*';
         } else {
             if (is_array($columns)) {
+                $columns = array_map(function($item) { return '`' . $item . '`'; } , $columns);
                 $columns = implode(',', $columns);
             } else {
                 $columns = '`' . $columns . '`';
             }
         }
 
-        $query = "SELECT {$columns} FROM {$table} {$where} {$order_by} {$limit}";
+        $query = trim("SELECT {$columns} FROM {$table} {$where} {$or_where} {$and_where} {$order_by} {$limit}");
         $query = mysql_query($query);
 
         if (mysql_num_rows($query)) {
