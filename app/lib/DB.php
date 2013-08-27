@@ -49,7 +49,7 @@ class DB {
 
 
     public function orderBy($order_by_column, $direction = null) {
-        self::$_order_by_column  = App::backtick($order_by_column);
+        self::$_order_by_column  = backtick($order_by_column);
         self::$_direction = ($direction) ? strtoupper($direction) : 'ASC';
 
         return $this;
@@ -71,7 +71,7 @@ class DB {
 
 
     public function where($column, $operator, $value) {
-        $value = App::quote(App::protect($value));
+        $value = quote(protect($value));
         self::$_where = 'WHERE ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
@@ -79,7 +79,7 @@ class DB {
 
 
     public function orWhere($column, $operator, $value) {
-        $value = App::quote(App::protect($value));
+        $value = quote(protect($value));
         self::$_or_where[] = 'OR ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
@@ -87,7 +87,7 @@ class DB {
 
 
     public function andWhere($column, $operator, $value) {
-        $value = App::quote(App::protect($value));
+        $value = quote(protect($value));
         self::$_and_where[] = ' AND ' . $column . ' ' . $operator . ' ' . $value;
 
         return $this;
@@ -96,7 +96,7 @@ class DB {
 
     public function prepare($columns = null) {
         $sql = array();
-        $sql['table'] = App::backtick(self::$_table);
+        $sql['table'] = backtick(self::$_table);
         $sql['order_by_column'] = $order_by_column = self::$_order_by_column;
         $sql['direction'] = $direction = self::$_direction;
         $sql['order_by'] = (self::$_order_by_column !== null) ? "ORDER BY {$order_by_column} {$direction}" : '';
@@ -110,11 +110,11 @@ class DB {
         } else {
             if (is_array($columns)) {
                 $columns = array_map(function($item) {
-                    return App::backtick($item);
+                    return backtick($item);
                 } , $columns);
                 $sql['columns'] = implode(',', $columns);
             } else {
-                $sql['columns'] = App::backtick($columns);
+                $sql['columns'] = backtick($columns);
             }
         }
 
@@ -157,8 +157,8 @@ class DB {
         $tmp = array();
 
         foreach ($update as $key => $value) {
-            $value = App::quote(App::protect($value));
-            $tmp[] = App::backtick($key) . ' = ' . $value;
+            $value = quote(protect($value));
+            $tmp[] = backtick($key) . ' = ' . $value;
         }
 
         $sql = implode(', ', $tmp);

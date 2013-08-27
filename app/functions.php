@@ -75,3 +75,15 @@ function d() {
         }, func_get_args()
     );
 }
+
+function protect($str) {
+    return mysql_real_escape_string(strip_tags(trim($str)));
+}
+
+function backtick($value) {
+    return (is_string($value) && strpos($value, '.') === false) ? '`' . $value . '`' : $value;
+}
+
+function quote($value) {
+    return (is_string($value)) ? '"' . $value . '"' : $value;
+}
