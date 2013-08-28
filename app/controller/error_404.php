@@ -1,6 +1,6 @@
 <?php
 
-class error_404 {
+class error_404 extends base_controller {
 
     public function index() {
         $title = title('Error 404');
