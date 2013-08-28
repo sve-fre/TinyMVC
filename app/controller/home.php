@@ -5,11 +5,13 @@ class home extends base_controller {
     public function index() {
         $title = title();
         $sub_headline = 'This is a sub headline';
+        $Lorem_Model = Model::get('Lorem');
+        $lorem_text = $Lorem_Model->getMessage();
 
         $data = array(
             'title' => $title,
             'header' => View::render('header', null, array('sub_dir' => 'misc')),
-            'content' => View::render('index', array('sub_headline' => $sub_headline), array('sub_dir' => 'home'))
+            'content' => View::render('index', array('sub_headline' => $sub_headline . $lorem_text,), array('sub_dir' => 'home'))
         );
 
         View::layout(self::$layout, $data);
