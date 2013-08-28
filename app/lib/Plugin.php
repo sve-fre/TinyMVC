@@ -57,15 +57,14 @@ class Plugin {
 
         $hook = array($hook, $data);
         self::$_hooks[] = $hook;
-        self::call($hook);
+        return self::call($hook);
     }
 
 
     public static function call($hook) {
         $plugins = self::$_valid_plugins;
         $hook_name = $hook[0];
-        $view_name = $hook[1][0];
-        $data = $hook[1][1];
+        $data = $hook[1];
 
         if (count($plugins)) {
             foreach ($plugins as $plugin) {
@@ -76,8 +75,10 @@ class Plugin {
                 $call_function = $plugin[0]['file_name'] . '__' . $hook_name;
 
                 if (function_exists($call_function)) {
-                    $call_function($view_name, $data);
+                    return $call_function($data);
                 }
+
+                return $data;
             }
         }
     }
