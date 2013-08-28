@@ -4,16 +4,11 @@ class App {
 
     public static function init() {
         App::setWorkMode(Config::get('app.workmode'));
-
-        if (Config::get('app.tinymvc_dashboard_url')) {
-            Router::register(Config::get('app.tinymvc_dashboard_url'), 'tinymvc_dashboard@index');
-        }
+        mb_internal_encoding(Config::get('app.mb_internal_encoding'));
 
         if (Config::get('app.enable_plugins')) {
             Plugin::init();
         }
-
-        mb_internal_encoding(Config::get('app.mb_internal_encoding'));
     }
 
 

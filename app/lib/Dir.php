@@ -1,8 +1,8 @@
 <?php
 
-class File {
+class Dir {
 
-    public static function readDir($dir, $callback = null) {
+    public static function read($dir, $callback = null) {
         if (!is_readable($dir)) {
             return false;
         }
@@ -22,7 +22,7 @@ class File {
             closedir($handle);
 
             if ($callback && is_callable($callback)) {
-                $callback($result);
+                return $callback($result);
             }
         }
 
