@@ -87,3 +87,27 @@ function backtick($value) {
 function quote($value) {
     return (is_string($value)) ? '"' . $value . '"' : $value;
 }
+
+function getData($uri) {
+    $local_path = (realpath(dirname($uri)));
+
+    if ($local_path) {
+        return ($content = file_get_contents($uri)) ? $content : '';
+    } else {
+        if (in_array('curl', get_loaded_extensions())) {
+            $ch = curl_init();
+            $timeout = 5;
+            curl_setopt($ch, CURLOPT_URL, $uri);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+            $data = curl_exec($ch);
+            curl_close($ch);
+
+            return $data;
+        } elseif (ini_get('allow_url_fopen')) {
+            return ($content = file_get_contents($uri)) ? $content : false;
+        }
+
+        return false;
+    }
+}

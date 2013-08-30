@@ -22,7 +22,7 @@ class File {
             return false;
         }
 
-        return ($content = file_get_contents($file)) ? $content : false;
+        return ($content = getData($file)) ? $content : false;
     }
 
 
@@ -51,7 +51,7 @@ class File {
         } elseif ($mode === 'write') {
             return (file_put_contents($file, $data)) ? true : false;
         } elseif ($mode === 'prepend') {
-            $old_content = file_get_contents($file);
+            $old_content = getData($file);
             return (file_put_contents($file, $data . $old_content)) ? true : false;
         }
     }
