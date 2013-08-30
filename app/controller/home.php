@@ -7,11 +7,14 @@ class home extends base_controller {
         $sub_headline = 'This is a sub headline';
         $Lorem_Model = Model::get('Lorem');
         $lorem_text = $Lorem_Model->getMessage();
+        $h1 = HTML::make('h1', array('class' => 'foo'), function() {
+            return 'lala';
+        });
 
         $data = array(
             'title' => $title,
             'header' => View::render('header', null, array('sub_dir' => 'misc')),
-            'content' => View::render('index', array('sub_headline' => $sub_headline . $lorem_text,), array('sub_dir' => 'home'))
+            'content' => View::render('index', array('sub_headline' => $sub_headline . $lorem_text . $h1), array('sub_dir' => 'home'))
         );
 
         View::layout(self::$layout, $data);
