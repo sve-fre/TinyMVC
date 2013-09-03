@@ -4,7 +4,6 @@ class Config {
 
     private static $_cfgs = array();
     private static $_loaded = false;
-    // TODO: only one $_loaded for many config files?
 
 
     private static function load() {
