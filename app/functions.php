@@ -13,20 +13,23 @@ function path($path = '') {
         case 'app':
             return ABS_PATH . 'app' . DS;
             break;
-        case 'lib':
-            return path('app') . 'lib' . DS;
+        case 'config':
+            return path('app') . 'config' . DS;
             break;
         case 'controller':
             return path('app') . Config::get('app.controller_dir') . DS;
             break;
+        case 'lib':
+            return path('app') . 'lib' . DS;
+            break;
         case 'model':
             return path('app') . Config::get('app.model_dir') . DS;
             break;
-        case 'view':
-            return path('app') . Config::get('app.view_dir') . DS;
-            break;
         case 'plugin':
             return path('app') . Config::get('app.plugin_dir') . DS;
+            break;
+        case 'view':
+            return path('app') . Config::get('app.view_dir') . DS;
             break;
         default:
             return ABS_PATH;

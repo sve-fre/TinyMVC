@@ -2,27 +2,22 @@
 
 class Config {
 
-    private static $cfgs = array();
-    private static $loaded = false;
-    // TODO: only one $loaded for many config files?
+    private static $_cfgs = array();
+    private static $_loaded = false;
+    // TODO: only one $_loaded for many config files?
 
 
     private static function load() {
-        $cfg_dir = ABS_PATH . 'app/config/';
-
-        if ($handle = opendir($cfg_dir)) {
-            while (false !== ($file = readdir($handle))) {
-                if ($file !== '.' && $file !== '..') {
-                    $filename = substr($file, 0, -4);
-
-                    if (is_readable($cfg_dir . $file)) {
-                        self::$cfgs[$filename] = include $cfg_dir . $file;
+        Dir::read(path('config'), function($files) {
+            if ($files && count($files)) {
+                foreach ($files as $file) {
+                    if (is_readable($file['file_path'])) {
+                        self::$_cfgs[substr($file['file_name'], 0, -4)] = include $file['file_path'];
+                        self::$_loaded = true;
                     }
                 }
             }
-            closedir($handle);
-            self::$loaded = true;
-        }
+        });
     }
 
 
@@ -31,20 +26,20 @@ class Config {
             return null;
         }
 
-        if (self::$loaded === false) {
+        if (self::$_loaded === false) {
             self::load();
         }
 
-        if (strpos($item, '.') !== true && isset(self::$cfgs[$item])) {
-            return self::$cfgs[$item];
+        if (strpos($item, '.') !== true && isset(self::$_cfgs[$item])) {
+            return self::$_cfgs[$item];
         } else {
             $items = explode('.', $item);
 
-            if (!isset(self::$cfgs[$items[0]])) {
+            if (!isset(self::$_cfgs[$items[0]])) {
                 return null;
             }
 
-            $array = self::$cfgs[$items[0]];
+            $array = self::$_cfgs[$items[0]];
 
             array_shift($items);
 
