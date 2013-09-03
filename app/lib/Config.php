@@ -12,9 +12,9 @@ class Config {
                 foreach ($files as $file) {
                     if (is_readable($file['file_path'])) {
                         self::$_cfgs[substr($file['file_name'], 0, -4)] = include $file['file_path'];
-                        self::$_loaded = true;
                     }
                 }
+                self::$_loaded = true;
             }
         });
     }
@@ -39,7 +39,6 @@ class Config {
             }
 
             $array = self::$_cfgs[$items[0]];
-
             array_shift($items);
 
             foreach ($items as $number => $key) {
