@@ -6,9 +6,9 @@ class home extends base_controller {
         $title = title();
         $sub_headline = 'This is a sub headline';
         $Lorem_Model = Model::get('Lorem');
-        $lorem_text = $Lorem_Model->getMessage();
-        $h1 = HTML::make('h1', array('class' => 'foo'), function() {
-            return 'lala';
+        $lorem_text = $Lorem_Model::getMessage();
+        $h1 = HTML::make('h1', array('class' => 'foo', 'title' => 'Title'), function() {
+            return '<code>$h1 = HTML::make(\'h1\', array(\'class\' => \'foo\', \'title\' => \'Title\'), function() { return \'Content\'; });<code>';
         });
 
         $data = array(

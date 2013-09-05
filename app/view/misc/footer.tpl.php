@@ -1,3 +1,3 @@
 <footer>
-    <p>by S. Frederick Müller</p>
+    <p>by fmllr.com</p>
 </footer>
