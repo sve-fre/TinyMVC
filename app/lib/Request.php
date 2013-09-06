@@ -33,8 +33,7 @@ class Request {
 
 
     public static function segments() {
-        $request = explode('/', self::get());
-        $request = array_slice($request, 3, count($request));
+        $request = array_filter(explode('/', self::get()));
 
         if (isset($request) && is_array($request) && count($request)) {
             return $request;
@@ -45,9 +44,8 @@ class Request {
 
 
     public static function segment($segment) {
-        $segment = ($segment < 1) ? 1 : (int)$segment - 1;
-        $request = explode('/', self::get());
-        $request = array_slice($request, 3, count($request));
+        $segment = (int)$segment + 1;
+        $request = array_values(explode('/', self::get()));
 
         return (isset($request[$segment])) ? $request[$segment] : null;
     }
