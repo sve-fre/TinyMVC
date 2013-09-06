@@ -5,7 +5,7 @@ class home extends base_controller {
 
     public function index() {
         $title = title();
-        $sub_headline = 'This is a sub headline';
+        $sub_headline = 'This comes from home@index.';
         $Lorem_Model = Model::get('Lorem');
         $lorem_text = $Lorem_Model::getMessage();
         $breadcrumb = App::breadcrumb();
@@ -16,7 +16,16 @@ class home extends base_controller {
         $data = array(
             'title' => $title,
             'header' => View::render('header', null, array('sub_dir' => 'misc')),
-            'content' => View::render('index', array('sub_headline' => $sub_headline . $lorem_text . $h1 . $breadcrumb), array('sub_dir' => 'home'))
+            'content' => View::render(
+                'index',
+                array(
+                    'sub_headline' => $sub_headline,
+                    'model' => $lorem_text,
+                    'h1' => $h1,
+                    'breadcrumb' => $breadcrumb
+                ),
+                array('sub_dir' => 'home')
+            )
         );
 
         View::layout(self::$layout, $data);
@@ -25,13 +34,42 @@ class home extends base_controller {
 
     public function about() {
         $title = title('About');
-        $sub_headline = 'This comes from home@about';
+        $sub_headline = 'This comes from home@about.';
         $breadcrumb = App::breadcrumb();
 
         $data = array(
             'title' => $title,
             'header' => View::render('header', null, array('sub_dir' => 'misc')),
-            'content' => View::render('index', array('sub_headline' => $sub_headline . $breadcrumb), array('sub_dir' => 'home'))
+            'content' => View::render(
+                'index',
+                array(
+                    'sub_headline' => $sub_headline,
+                    'breadcrumb' => $breadcrumb
+                ),
+                array('sub_dir' => 'home')
+            )
+        );
+
+        View::layout(self::$layout, $data);
+    }
+
+
+    public function lala() {
+        $title = title('Lala');
+        $sub_headline = 'This comes from home@lala.';
+        $breadcrumb = App::breadcrumb();
+
+        $data = array(
+            'title' => $title,
+            'header' => View::render('header', null, array('sub_dir' => 'misc')),
+            'content' => View::render(
+                'index',
+                array(
+                    'sub_headline' => $sub_headline,
+                    'breadcrumb' => $breadcrumb
+                ),
+                array('sub_dir' => 'home')
+            )
         );
 
         View::layout(self::$layout, $data);
@@ -40,16 +78,21 @@ class home extends base_controller {
 
     public function registered_route() {
         $title = title('Registered route');
-        $sub_headline = 'This was registered in <code>routes.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>';
+        $sub_headline = 'This was registered in <code>routes.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>.';
         $breadcrumb = App::breadcrumb();
 
         $data = array(
             'title' => $title,
             'header' => View::render('header', null, array('sub_dir' => 'misc')),
-            'content' => View::render('index', array('sub_headline' => $sub_headline . $breadcrumb), array('sub_dir' => 'home'))
+            'content' => View::render(
+                'index',
+                array(
+                    'sub_headline' => $sub_headline,
+                    'breadcrumb' => $breadcrumb
+                ),
+                array('sub_dir' => 'home')
+            )
         );
-
-        App::breadcrumb();
 
         View::layout(self::$layout, $data);
     }

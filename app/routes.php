@@ -1,6 +1,7 @@
 <?php
 
 Router::register('registered-route', 'home@registered_route');
+Router::register('home/about/lala', 'home@lala');
 
 Router::route('no-controller', function() {
     $title = title('No controller');

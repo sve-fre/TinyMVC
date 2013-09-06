@@ -35,3 +35,16 @@ ul li {
     display: inline;
     margin: 0 10px 0 0;
 }
+
+#breadcrumb a:after {
+    content: ' > ';
+}
+
+#breadcrumb li:last-child a:after {
+    content: '';
+}
+
+code {
+    font: 100.01% monospace;
+    color: #777;
+}

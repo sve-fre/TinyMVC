@@ -51,11 +51,10 @@ class App {
     public static function breadcrumb() {
         $output = HTML::make('ul', array('id' => 'breadcrumb'), function() {
             $items = '';
-            $parts = array_reverse(array_values(Request::segments()));
-            d($parts);
+            $parts = array_values(Request::segments());
 
             for ($i = 0; $i < count($parts); $i++) {
-                $url = url(implode('/', $parts));
+                $url = url(implode('/', array_slice($parts, 0, $i + 1)));
                 $items .= '<li><a href="' . $url . '">' . $parts[$i] . '</a></li>';
             }
 
