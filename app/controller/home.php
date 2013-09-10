@@ -8,7 +8,7 @@ class home extends base_controller {
         $sub_headline = 'This comes from home@index.';
         $Lorem_Model = Model::get('Lorem');
         $lorem_text = $Lorem_Model::getMessage();
-        $breadcrumb = App::breadcrumb();
+        $breadcrumb = Breadcrumb::get(self::$breadcrumb_config);
         $h1 = HTML::make('h1', array('class' => 'foo', 'title' => 'Title'), function() {
             return '<code>$h1 = HTML::make(\'h1\', array(\'class\' => \'foo\', \'title\' => \'Title\'), function() { return \'Content\'; });</code>';
         });
@@ -35,7 +35,7 @@ class home extends base_controller {
     public function about() {
         $title = title('About');
         $sub_headline = 'This comes from home@about.';
-        $breadcrumb = App::breadcrumb();
+        $breadcrumb = Breadcrumb::get(self::$breadcrumb_config);
 
         $data = array(
             'title' => $title,
@@ -57,7 +57,7 @@ class home extends base_controller {
     public function lala() {
         $title = title('Lala');
         $sub_headline = 'This comes from home@lala.';
-        $breadcrumb = App::breadcrumb();
+        $breadcrumb = Breadcrumb::get(self::$breadcrumb_config);
 
         $data = array(
             'title' => $title,
@@ -79,7 +79,7 @@ class home extends base_controller {
     public function registered_route() {
         $title = title('Registered route');
         $sub_headline = 'This was registered in <code>routes.php</code> via <code>Router::register(\'registered-route\', \'home@registered_route\');</code>.';
-        $breadcrumb = App::breadcrumb();
+        $breadcrumb = Breadcrumb::get(self::$breadcrumb_config);
 
         $data = array(
             'title' => $title,

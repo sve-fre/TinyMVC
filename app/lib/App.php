@@ -47,21 +47,4 @@ class App {
         return trim(substr(Config::get('app.install_dir'), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
     }
 
-
-    public static function breadcrumb() {
-        $output = HTML::make('ul', array('id' => 'breadcrumb'), function() {
-            $items = '';
-            $parts = array_values(Request::segments());
-
-            for ($i = 0; $i < count($parts); $i++) {
-                $url = url(implode('/', array_slice($parts, 0, $i + 1)));
-                $items .= '<li><a href="' . $url . '">' . $parts[$i] . '</a></li>';
-            }
-
-            return $items;
-        });
-
-        return $output;
-    }
-
 }

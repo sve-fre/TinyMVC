@@ -6,7 +6,7 @@ Router::register('home/about/lala', 'home@lala');
 Router::route('no-controller', function() {
     $title = title('No controller');
     $sub_headline = 'No controller was used to display this content';
-    $breadcrumb = App::breadcrumb();
+    $breadcrumb = Breadcrumb::get();
 
     $data = array(
         'title' => $title,
