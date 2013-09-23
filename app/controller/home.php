@@ -2,7 +2,6 @@
 
 class home extends base_controller {
 
-
     public function index() {
         $title = title();
         $sub_headline = 'This comes from home@index.';
