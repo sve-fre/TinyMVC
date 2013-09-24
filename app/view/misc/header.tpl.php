@@ -8,6 +8,7 @@
             <li><a href="<?php echo url('home/about/lala'); ?>">Lala</a></li>
             <li><a href="<?php echo url('registered-route'); ?>">Registered route</a></li>
             <li><a href="<?php echo url('no-controller'); ?>">No controller</a></li>
+            <li><a href="<?php echo url('home/storage_test'); ?>">Storage Test</a></li>
         </ul>
     </nav>
 </header>

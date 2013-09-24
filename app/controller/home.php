@@ -96,4 +96,34 @@ class home extends base_controller {
         View::layout(self::$layout, $data);
     }
 
+
+    public function storage_test() {
+        $title = title('Storage Test');
+        $sub_headline = 'Testing the Storage class.';
+        $breadcrumb = Breadcrumb::get(self::$breadcrumb_config);
+
+        if (!Storage::exists('songs')) {
+            Storage::make('songs', array(
+                'title',
+                'interpret',
+                'duration'
+            ));
+        }
+
+        $data = array(
+            'title' => $title,
+            'header' => View::render('header', null, array('sub_dir' => 'misc')),
+            'content' => View::render(
+                'index',
+                array(
+                    'sub_headline' => $sub_headline,
+                    'breadcrumb' => $breadcrumb
+                ),
+                array('sub_dir' => 'home')
+            )
+        );
+
+        View::layout(self::$layout, $data);
+    }
+
 }

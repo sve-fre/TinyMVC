@@ -50,7 +50,7 @@ class Storage {
 
 
     private static function _init($storage) {
-        self::$_dir = realpath(dirname(__FILE__)) . '/storage/';
+        self::$_dir = path('storage');
         self::$_extension = '.storage';
         self::$_storage = self::$_dir . $storage . self::$_extension;
 

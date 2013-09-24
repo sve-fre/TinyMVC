@@ -28,6 +28,9 @@ function path($path = '') {
         case 'plugin':
             return path('app') . Config::get('app.plugin_dir') . DS;
             break;
+        case 'storage':
+            return path('app') . Config::get('app.storage_dir') . DS;
+            break;
         case 'view':
             return path('app') . Config::get('app.view_dir') . DS;
             break;
