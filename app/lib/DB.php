@@ -118,6 +118,14 @@ class DB {
             }
         }
 
+        // Reset stuff
+        self::$_order_by_column = null;
+        self::$_direction = null;
+        self::$_limit = null;
+        self::$_where = null;
+        self::$_or_where = array();
+        self::$_and_where = array();
+
         return $sql;
     }
 
