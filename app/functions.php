@@ -19,8 +19,8 @@ function path($path = '') {
         case 'controller':
             return path('app') . Config::get('app.controller_dir') . DS;
             break;
-        case 'lib':
-            return path('app') . 'lib' . DS;
+        case 'class':
+            return path('app') . 'class' . DS;
             break;
         case 'model':
             return path('app') . Config::get('app.model_dir') . DS;

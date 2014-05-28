@@ -5,7 +5,7 @@ require_once path('app') . 'routes.php';
 require_once path('controller') . 'base_controller.php';
 
 function __autoload($class) {
-    $class = path('lib') . $class . '.php';
+    $class = path('class') . $class . '.php';
 
     if (!is_readable($class)) {
         return;
