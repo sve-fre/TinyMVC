@@ -55,7 +55,7 @@ function title($title = '') {
 function d() {
     array_map(
         function($x) {
-            echo '<pre style="font-family: monospace; margin: 1em; padding: .5em; border: 1px solid #ddd; background-color: #fff; color: #000; overflow: auto;">';
+            echo '<pre style="font: 14px/1.4 monospace; margin: 1em; padding: .5em; border: 1px solid #ddd; background-color: #fff; color: #000; overflow: auto;">';
             var_dump($x);
             echo '</pre>';
         }, func_get_args()
