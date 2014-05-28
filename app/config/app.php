@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'base_url' => 'http://localhost/TinyMVC/',            // trailing slash required
+    'base_url' => 'http://localhost:88/TinyMVC/',            // trailing slash required
     'mod_rewrite' => false,                               // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
     'install_dir' => dirname(dirname(dirname(__FILE__))), // installation directory of TinyMVC
 
