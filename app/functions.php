@@ -5,38 +5,18 @@ function path($path = '') {
         return ABS_PATH;
     }
 
-    switch ($path) {
-        case '':
-        case '/':
-            return ABS_PATH;
-            break;
-        case 'app':
-            return ABS_PATH . 'app' . DS;
-            break;
-        case 'config':
-            return path('app') . 'config' . DS;
-            break;
-        case 'controller':
-            return path('app') . Config::get('app.controller_dir') . DS;
-            break;
-        case 'class':
-            return path('app') . 'class' . DS;
-            break;
-        case 'model':
-            return path('app') . Config::get('app.model_dir') . DS;
-            break;
-        case 'plugin':
-            return path('app') . Config::get('app.plugin_dir') . DS;
-            break;
-        case 'storage':
-            return path('app') . Config::get('app.storage_dir') . DS;
-            break;
-        case 'view':
-            return path('app') . Config::get('app.view_dir') . DS;
-            break;
-        default:
-            return ABS_PATH;
-    }
+    $valid_paths = array(
+        'app' => ABS_PATH . 'app',
+        'class' => ABS_PATH . 'app' . DS . 'class',
+        'config' => ABS_PATH . 'app' . DS . 'config',
+        'controller' => ABS_PATH . 'app' . DS . 'controller',
+        'model' => ABS_PATH . 'app' . DS . 'model',
+        'plugin' => ABS_PATH . 'app' . DS . 'plugin',
+        'storage' => ABS_PATH . 'app' . DS . 'storage',
+        'view' => ABS_PATH . 'app' . DS . 'view'
+    );
+
+    return (array_key_exists($path, $valid_paths)) ? $valid_paths[$path] . DS : ABS_PATH;
 }
 
 function url($url = '') {
