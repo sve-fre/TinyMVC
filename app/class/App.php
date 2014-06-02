@@ -2,7 +2,7 @@
 
 class App {
 
-    private static function _getInstallDirectory() {
+    private static function _getInstallDir() {
         return dirname(dirname(dirname(__FILE__)));
     }
 
@@ -35,8 +35,8 @@ class App {
     }
 
 
-    public static function installedInSubdirectory() {
-        if ($_SERVER['DOCUMENT_ROOT'] === self::_getInstallDirectory()) {
+    public static function isInstalledInSubDir() {
+        if ($_SERVER['DOCUMENT_ROOT'] === self::_getInstallDir()) {
             return false;
         }
 
@@ -44,12 +44,12 @@ class App {
     }
 
 
-    public static function getSubdirectory() {
-        if (!self::installedInSubdirectory()) {
-            return false;
+    public static function getSubDir() {
+        if (!self::isInstalledInSubDir()) {
+            return '';
         }
 
-        return trim(substr(self::_getInstallDirectory(), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
+        return trim(substr(self::_getInstallDir(), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
     }
 
 }

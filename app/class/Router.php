@@ -63,7 +63,7 @@ class Router {
 
         if (count($routes)) {
             foreach ($routes as $route) {
-                $target_route = (App::installedInSubdirectory()) ? App::getSubdirectory() : '';
+                $target_route = (App::isInstalledInSubDir()) ? App::getSubDir() : '';
 
                 if (ltrim(Request::get(), '/') == $route[0]) {
                     $controller = $route[1][0];
