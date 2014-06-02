@@ -8,7 +8,7 @@ class Router {
 
 
     public static function route($route, $callback) {
-        if ($route === ltrim(Request::get(), DS)) {
+        if ($route === ltrim(Request::get(), '/')) {
             App::init();
             self::$_callback = true;
             $callback();
@@ -65,7 +65,7 @@ class Router {
             foreach ($routes as $route) {
                 $target_route = (App::installedInSubdirectory()) ? App::getSubdirectory() : '';
 
-                if (ltrim(Request::get(), DS) == $route[0]) {
+                if (ltrim(Request::get(), '/') == $route[0]) {
                     $controller = $route[1][0];
                     $controller_file = path('controller') . $controller . '.php';
                     $action = $route[1][1];
