@@ -3,7 +3,6 @@
 return array(
     'base_url' => 'http://localhost/TinyMVC/',            // trailing slash required
     'mod_rewrite' => false,                               // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
-    'install_dir' => dirname(dirname(dirname(__FILE__))), // installation directory of TinyMVC
 
     'title' => 'TinyMVC',                           // title of your project
     'title_separator' => ' | ',                     // used between base title and page title

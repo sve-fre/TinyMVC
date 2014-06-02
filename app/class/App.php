@@ -2,6 +2,11 @@
 
 class App {
 
+    private static function _getInstallDirectory() {
+        return dirname(dirname(dirname(__FILE__)));
+    }
+
+
     public static function init() {
         App::setWorkMode(Config::get('app.workmode'));
         mb_internal_encoding(Config::get('app.mb_internal_encoding'));
@@ -31,7 +36,7 @@ class App {
 
 
     public static function installedInSubdirectory() {
-        if ($_SERVER['DOCUMENT_ROOT'] === Config::get('app.install_dir')) {
+        if ($_SERVER['DOCUMENT_ROOT'] === self::_getInstallDirectory()) {
             return false;
         }
 
@@ -44,7 +49,7 @@ class App {
             return false;
         }
 
-        return trim(substr(Config::get('app.install_dir'), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
+        return trim(substr(self::_getInstallDirectory(), strlen($_SERVER['DOCUMENT_ROOT'])), DS);
     }
 
 }
