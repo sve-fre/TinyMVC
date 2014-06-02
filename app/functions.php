@@ -75,7 +75,7 @@ function quote($value) {
 }
 
 function getData($uri) {
-    $local_path = (realpath(dirname($uri)));
+    $local_path = realpath(dirname($uri));
 
     if ($local_path) {
         return ($content = file_get_contents($uri)) ? $content : '';
