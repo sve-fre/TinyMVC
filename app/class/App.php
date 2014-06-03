@@ -2,6 +2,22 @@
 
 class App {
 
+    private static function _setEnvironment() {
+        if (count(Config::get('app.environment'))) {
+            foreach (Config::get('app.environment') as $env) {
+                if (strpos($env['base_url'], $_SERVER['HTTP_HOST']) !== false) {
+                    Config::set('app.base_url', $env['base_url']);
+                    Config::set('app.db_host', $env['db_host']);
+                    Config::set('app.db_user', $env['db_user']);
+                    Config::set('app.db_password', $env['db_password']);
+                    Config::set('app.db_name.foo', $env['db_name']);
+                    break;
+                }
+            }
+        }
+    }
+
+
     private static function _getInstallDir() {
         return dirname(dirname(dirname(__FILE__)));
     }
@@ -14,6 +30,9 @@ class App {
         if (Config::get('app.enable_plugins')) {
             Plugin::init();
         }
+
+        App::_setEnvironment();
+        Router::listen();
     }
 
 

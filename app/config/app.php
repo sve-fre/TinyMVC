@@ -1,7 +1,22 @@
 <?php
 
 return array(
-    'base_url' => 'http://localhost/TinyMVC/',            // trailing slash required
+    'environment' => array(
+        0 => array(
+            'base_url' => 'http://localhost/TinyMVC/',      // trailing slash required
+            'db_host' => 'localhost',                       // mysql database host name
+            'db_user' => 'root',                            // mysql database user name
+            'db_password' => '',                            // mysql database password
+            'db_name' => '',                                // mysql database name
+        ),
+        1 => array(
+            'base_url' => 'http://localhost:88/TinyMVC/',   // trailing slash required
+            'db_host' => 'localhost',                       // mysql database host name
+            'db_user' => 'root',                            // mysql database user name
+            'db_password' => '',                            // mysql database password
+            'db_name' => '',                                // mysql database name
+        )
+    ),
     'mod_rewrite' => false,                               // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
 
     'title' => 'TinyMVC',                           // title of your project
@@ -12,11 +27,6 @@ return array(
     'error_controller' => 'error_404',              // controller gets called when Router doesn't find a controller
     'view_extension' => '.tpl.php',                 // extension of view files, once declared here, you just purely use view's name, when working with views
     'layout_extension' => '.tpl.php',               // extension of layout files, once declared here, you just purely use layout's name, when working with views
-
-    'db_host' => 'localhost',                       // mysql database host name
-    'db_user' => 'root',                            // mysql database user name
-    'db_password' => '',                            // mysql database password
-    'db_name' => '',                                // mysql database name
 
     'enable_plugins' => true,                       // enable plugins?
     'workmode' => 'dev',                            // (dev|live) set error displays

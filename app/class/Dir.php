@@ -2,8 +2,18 @@
 
 class Dir {
 
+    public static function isReadable($dir) {
+        return (File::isReadable($dir) && is_dir($dir));
+    }
+
+
+    public static function exists($dir) {
+        return (File::exists($dir) && is_dir($dir));
+    }
+
+
     public static function read($dir, $callback = null) {
-        if (!is_readable($dir)) {
+        if (!Dir::isReadable($dir)) {
             return false;
         }
 

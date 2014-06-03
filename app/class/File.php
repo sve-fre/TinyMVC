@@ -2,6 +2,21 @@
 
 class File {
 
+    public static function isWritable($file) {
+        return (is_writable($file));
+    }
+
+
+    public static function isReadable($file) {
+        return (is_readable($file));
+    }
+
+
+    public static function exists($file) {
+        return (file_exists($file));
+    }
+
+
     public static function create($file, $time = null) {
         $dir = realpath(dirname($file));
 

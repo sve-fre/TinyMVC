@@ -15,4 +15,3 @@ function __autoload($class) {
 }
 
 App::init();
-Router::listen();
