@@ -2,6 +2,8 @@
 
 class App {
 
+    private static $_initialized = false;
+
     private static function _setEnvironment() {
         if (count(Config::get('app.environment'))) {
             foreach (Config::get('app.environment') as $env) {
@@ -24,19 +26,23 @@ class App {
 
 
     public static function init() {
-        App::setWorkMode(Config::get('app.workmode'));
-        mb_internal_encoding(Config::get('app.mb_internal_encoding'));
+        if (!self::$_initialized) {
+            App::setWorkMode(Config::get('app.workmode'));
+            mb_internal_encoding(Config::get('app.mb_internal_encoding'));
 
-        if (File::exists(path('controller') . 'base_controller.php')) {
-            require_once path('controller') . 'base_controller.php';
+            if (File::exists(path('controller') . 'base_controller.php')) {
+                require_once path('controller') . 'base_controller.php';
+            }
+
+            if (Config::get('app.enable_plugins')) {
+                Plugin::init();
+            }
+
+            App::_setEnvironment();
+            Router::listen();
         }
 
-        if (Config::get('app.enable_plugins')) {
-            Plugin::init();
-        }
-
-        App::_setEnvironment();
-        Router::listen();
+        self::$_initialized = true;
     }
 
 
