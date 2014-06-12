@@ -9,8 +9,8 @@ class Router {
 
     public static function route($route, $callback) {
         if ($route === ltrim(Request::get(), '/')) {
-            App::init();
             self::$_callback = true;
+            App::init();
             $callback();
         }
     }
@@ -41,7 +41,7 @@ class Router {
         $error_404 = Config::get('app.error_controller');
         $error_404_file = path('controller') . $error_404 . '.php';
 
-        if (is_readable($error_404_file)) {
+        if (File::isReadable($error_404_file)) {
             include $error_404_file;
             $controller = new $error_404();
 

@@ -27,6 +27,10 @@ class App {
         App::setWorkMode(Config::get('app.workmode'));
         mb_internal_encoding(Config::get('app.mb_internal_encoding'));
 
+        if (File::exists(path('controller') . 'base_controller.php')) {
+            require_once path('controller') . 'base_controller.php';
+        }
+
         if (Config::get('app.enable_plugins')) {
             Plugin::init();
         }
