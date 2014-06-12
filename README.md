@@ -5,9 +5,9 @@ Very tiny PHP 5.3 MVC tool, not yet ready for live usage
 
 ToDo:
 - remove class breadcrumb
-- add class string, add methods contains (for config::get), isAlphanumeric, isEmail, etc.
+- ~~add class string, add methods contains (for config::get)~~, isAlphanumeric, isEmail, etc.
 - class db add table create, truncate, delete, use mysqli
-- config: add "app.db_env1.dbhost"
+- ~~config: add "app.db_env1.dbhost"~~
 - class dir add methods create, delete, move, exists (for plugin::)
 - class file add method getExtenion (for config::load), getSize, getDimension, lastEdit, exists
 - add class helper

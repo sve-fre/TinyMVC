@@ -3,6 +3,12 @@
 Router::register('registered-route', 'home@registered_route');
 Router::register('home/about/lala', 'home@lala');
 
+Router::route('ricknroll', function() {
+    echo HTML::make('p', function() {
+        return 'You found a secret.';
+    });
+});
+
 Router::route('no-controller', function() {
     $title = title('No controller');
     $sub_headline = 'No controller was used to display this content';
