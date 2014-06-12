@@ -19,3 +19,4 @@ ToDo:
 - add class form
 - add class exception/error/warning
 - add set method for Config class
+- add class validator
