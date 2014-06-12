@@ -10,7 +10,7 @@ class App {
                     Config::set('app.db_host', $env['db_host']);
                     Config::set('app.db_user', $env['db_user']);
                     Config::set('app.db_password', $env['db_password']);
-                    Config::set('app.db_name.foo', $env['db_name']);
+                    Config::set('app.db_name', $env['db_name']);
                     break;
                 }
             }
