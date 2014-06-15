@@ -18,6 +18,6 @@ ToDo:
 - add class splittest
 - add class form
 - add class exception/error/warning
-- ~~~~add set method for Config class~~
+- ~~add set method for Config class~~
 - add class validator
 - ~~fix bug in class HTML, when HTML class used inside callback function of HTML class (reset private properties)~~
