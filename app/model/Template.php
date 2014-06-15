@@ -1,6 +1,6 @@
 <?php
 
-class Tpl {
+class Template {
 
     public function header($data = null) {
         return View::render('header', $data, array('sub_dir' => 'misc'));

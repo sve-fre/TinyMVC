@@ -1,7 +1,7 @@
 <?php
 
 Router::route('home/about', function() {
-    $tpl = Model::get('Tpl');
+    $tpl = Model::get('Template');
     $data = array(
         'title' => title('About'),
         'header' => $tpl->header(),

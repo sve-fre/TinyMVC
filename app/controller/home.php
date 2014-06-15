@@ -3,7 +3,7 @@
 class home extends base_controller {
 
     public function index() {
-        $tpl = Model::get('Tpl');
+        $tpl = Model::get('Template');
         $data = array(
             'title' => title(),
             'header' => $tpl->header(),
