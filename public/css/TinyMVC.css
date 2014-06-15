@@ -1,10 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-}
+@import 'normalize.css';
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
 body {
-    font: 100.01%/1.6 sans-serif;
+    font: 100.01%/1.6 'Open Sans', sans-serif;
     color: #555;
     background-color: #eee;
 }
@@ -17,8 +15,18 @@ body {
     width: 960px;
 }
 
+h1 {
+    margin: 0;
+}
+
 nav ul {
     list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px 0 0;
 }
 
 a {
@@ -29,22 +37,4 @@ a {
 
 a:hover {
     color: darkslateblue;
-}
-
-ul li {
-    display: inline;
-    margin: 0 10px 0 0;
-}
-
-#breadcrumb a:after {
-    content: ' > ';
-}
-
-#breadcrumb li:last-child a:after {
-    content: '';
-}
-
-code {
-    font: 100.01% monospace;
-    color: #777;
 }
