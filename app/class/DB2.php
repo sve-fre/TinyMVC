@@ -12,7 +12,7 @@ class DB2 {
     private $_db_connection_error = false;
 
 
-    public static function table() {
+    public static function instance() {
         if (self::$_instance === null) {
             self::$_instance = new self;
         }
@@ -51,34 +51,25 @@ class DB2 {
                 $this->_db_connection_error = true;
             }
         }
+
+        if ($this->_db_connection_error) {
+            die('Could not connect to database.');
+        }
     }
 
 
-    public function query($query) {
+    public function select($select) {
         $result = array();
+        $query = $this->_db_connection->query($select);
 
-        if ($this->_db_wrapper === 'pdo') {
-            $query = $this->_db_connection->query($query);
-
-            if ($query->rowCount()) {
-                //return $query->fetchAll();
-                while ($obj = $query->fetchObject()) {
-                    $result[] = $obj;
-                }
+        if ($this->_db_wrapper === 'pdo' && $query->rowCount()) {
+            while ($obj = $query->fetchObject()) {
+                $result[] = $obj;
             }
-
-            return $result;
-        } elseif ($this->_db_wrapper === 'mysqli') {
-            $query = $this->_db_connection->query($query);
-            $result = array();
-
-            if ($query->num_rows) {
-                while ($obj = $query->fetch_object()) {
-                    $result[] = $obj;
-                }
+        } elseif ($this->_db_wrapper === 'mysqli' && $query->num_rows) {
+            while ($obj = $query->fetch_object()) {
+                $result[] = $obj;
             }
-
-            return $result;
         }
 
         return $result;
