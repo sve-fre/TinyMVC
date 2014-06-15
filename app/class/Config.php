@@ -9,15 +9,28 @@ class Config {
     public static function set($key, $value) {
         if (String::contains($key, '.')) {
             $parts = explode('.', $key);
+            $num = count($parts);
 
-            $tmp_eval = 'self::$_cfgs';
+            switch ($num) {
+                case 1:
+                    self::$_cfgs[$parts[0]] = $value;
+                break;
 
-            for ($i = 0; $i < count($parts); $i++) {
-                $tmp_eval .= '[$parts[' . $i . ']]';
+                case 2:
+                    self::$_cfgs[$parts[0]][$parts[1]] = $value;
+                break;
+
+                case 3:
+                    self::$_cfgs[$parts[0]][$parts[1]][$parts[2]] = $value;
+                break;
+
+                case 4:
+                    self::$_cfgs[$parts[0]][$parts[1]][$parts[2]][$parts[3]] = $value;
+                break;
+
+                default:
+                    self::$_cfgs[$parts[0]] = $value;
             }
-
-            $tmp_eval .= ' = ' . (is_string($value) ? '\''. $value . '\'' : '\'\'') . ';';
-            eval($tmp_eval);
 
             return true;
         }
@@ -67,6 +80,11 @@ class Config {
 
             return $array;
         }
+    }
+
+
+    public static function all() {
+        return self::$_cfgs;
     }
 
 }
