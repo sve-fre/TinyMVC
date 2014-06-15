@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
   RewriteEngine on
+  #RewriteBase /TinyMVC
 
   # If your site can be accessed both with and without the 'www.' prefix, you
   # can use one of the following settings to redirect users to your preferred
@@ -16,8 +17,8 @@
   # uncomment the following:
   # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   # RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
-  
-  
+
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
