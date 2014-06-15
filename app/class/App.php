@@ -7,12 +7,15 @@ class App {
     private static function _setEnvironment() {
         if (count(Config::get('app.environment'))) {
             foreach (Config::get('app.environment') as $env) {
-                if (strpos($env['base_url'], $_SERVER['HTTP_HOST']) !== false) {
+                if (String::contains($env['base_url'], $_SERVER['HTTP_HOST'])) {
                     Config::set('app.base_url', $env['base_url']);
                     Config::set('app.db_host', $env['db_host']);
                     Config::set('app.db_user', $env['db_user']);
                     Config::set('app.db_password', $env['db_password']);
                     Config::set('app.db_name', $env['db_name']);
+                    Config::set('app.db_wrapper', $env['db_wrapper']);
+                    Config::set('app.mod_rewrite', $env['mod_rewrite']);
+                    Config::set('app.workmode', $env['workmode']);
                     break;
                 }
             }

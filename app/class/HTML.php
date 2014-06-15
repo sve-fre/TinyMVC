@@ -35,8 +35,11 @@ class HTML {
         }
 
         self::$_output .= '</' . $tag . '>';
+        $output = self::$_output;
+        self::$_output = '';
+        self::$_closed = false;
 
-        return self::$_output;
+        return $output;
     }
 
     private static function _callback($callback) {
