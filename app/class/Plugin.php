@@ -51,6 +51,10 @@ class Plugin {
 
 
     public static function registerHook($hook, $data = null) {
+        if (!Config::get('app.enable_plugins')) {
+            return $data;
+        }
+
         if (!$data) {
             self::$_hooks[] = $hook;
         }
