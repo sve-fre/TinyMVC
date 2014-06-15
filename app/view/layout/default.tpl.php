@@ -10,10 +10,8 @@
 <body>
     <div id="wrapper">
         <?php echo $header; ?>
-
-        <div id="content">
-            <?php echo $content; ?>
-        </div>
+        <?php echo $content; ?>
+        <?php echo $footer; ?>
     </div><!-- /#wrapper -->
 </body>
 </html>

@@ -7,7 +7,8 @@ class home extends base_controller {
         $data = array(
             'title' => title(),
             'header' => $tpl->header(),
-            'content' => $tpl->content(array('content' => 'Index.'))
+            'content' => $tpl->content(array('content' => 'Index.')),
+            'footer' => $tpl->footer()
         );
 
         View::layout(self::$layout, $data);

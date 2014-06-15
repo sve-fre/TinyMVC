@@ -5,7 +5,8 @@ Router::route('home/about', function() {
     $data = array(
         'title' => title('About'),
         'header' => $tpl->header(),
-        'content' => $tpl->content(array('content' => 'About.'))
+        'content' => $tpl->content(array('content' => 'About.')),
+        'footer' => $tpl->footer()
     );
 
     View::layout('default', $data);
