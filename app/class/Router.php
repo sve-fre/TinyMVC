@@ -82,7 +82,7 @@ class Router {
             $action = Request::action();
         }
 
-        if (is_readable($controller_file)) {
+        if (File::isReadable($controller_file)) {
             include $controller_file;
             $controller = new $controller();
 
