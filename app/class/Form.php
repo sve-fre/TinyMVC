@@ -5,6 +5,7 @@ class Form {
     private static $_action = null;
     private static $_method = null;
     private static $_output = '';
+    private static $_form_close = '</form>';
 
 
     public static function make($action, $method, $callback, $attributes = array()) {
@@ -22,7 +23,7 @@ class Form {
             $callback(new self);
         }
 
-        return self::$_output;
+        return self::$_output . self::$_form_close;
     }
 
 
