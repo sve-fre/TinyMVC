@@ -13,9 +13,13 @@ class View {
      */
     public static function render($view, $data = null, $config = null) {
         $data = Plugin::registerHook('view_render', $data);
-
-        $view_dir = (isset($config) && array_key_exists('sub_dir', $config)) ? path('view') . $config['sub_dir'] . DS : path('view');
         $buffer = (isset($config) && array_key_exists('buffer', $config)) ? (($config['buffer'] === true) ? true : false) : true;
+
+        if (isset($config) && array_key_exists('sub_dir', $config)) {
+            $view_dir = path('view') . (is_array($config['sub_dir']) ? implode(DS, $config['sub_dir']) : $config['sub_dir']) . DS;
+        } else {
+            $view_dir = path('view');
+        }
 
         $view = $view_dir . $view . Config::get('app.view_extension');
 
