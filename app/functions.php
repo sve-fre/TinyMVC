@@ -97,3 +97,16 @@ function getData($uri) {
         return false;
     }
 }
+
+function stringifyHTMLAttributes($attributes = array()) {
+    $output = '';
+
+    if (count($attributes)) {
+        foreach ($attributes as $property => $value) {
+            $output .= ' ' . $property . '=' . (is_numeric($value) || is_bool($value) ? $value : '"' . $value . '"');
+        }
+    }
+
+    return $output;
+}
+
