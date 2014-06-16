@@ -6,7 +6,7 @@ class home extends base_controller {
         $tpl = Model::get('Template');
 
         $form = Form::make('/', 'POST', function($form) {
-            $form->textfield('name');
+            $form->textfield('name')->wrap('div', array('class' => 'textfield-wrapper'));
         }, array(
             'class' => 'name-form'
         ));

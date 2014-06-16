@@ -38,3 +38,11 @@ a {
 a:hover {
     color: darkslateblue;
 }
+
+.name-form {
+    background-color: #ddd;
+}
+
+.textfield-wrapper {
+    padding: 10px;
+}
