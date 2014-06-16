@@ -103,7 +103,7 @@ function stringifyHTMLAttributes($attributes = array()) {
 
     if (count($attributes)) {
         foreach ($attributes as $property => $value) {
-            $output .= ' ' . $property . '=' . (is_numeric($value) || is_bool($value) ? $value : '"' . $value . '"');
+            $output .= ' ' . $property . '=' . '"' . $value . '"';
         }
     }
 
