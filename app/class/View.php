@@ -23,7 +23,7 @@ class View {
 
         $view = $view_dir . $view . Config::get('app.view_extension');
 
-        if (!is_readable($view)) {
+        if (!File::isReadable($view)) {
             echo 'View <code>' . $view . '</code> is not readable or does not exist';
         } else {
             if ($data !== null && is_array($data)) {
@@ -59,7 +59,7 @@ class View {
         $data = Plugin::registerHook('layout_render', $data);
         $layout = path('view') . 'layout' . DS . $layout . Config::get('app.layout_extension');
 
-        if (!is_readable($layout)) {
+        if (!File::isReadable($layout)) {
             echo 'Layout <code>' . $layout . '</code> is not readable or does not exist';
         } else {
             if ($data !== null && is_array($data)) {
