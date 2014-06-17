@@ -17,7 +17,7 @@ class File {
     }
 
 
-    public static function create($file, $time = null) {
+    public static function make($file, $time = null) {
         $dir = realpath(dirname($file));
 
         if (!is_readable($dir) || !is_writeable($dir)) {

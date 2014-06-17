@@ -32,6 +32,8 @@ return array(
     'error_controller' => 'error_404',              // controller gets called when Router doesn't find a controller
     'view_extension' => '.tpl.php',                 // extension of view files, once declared here, you just purely use view's name, when working with views
     'layout_extension' => '.tpl.php',               // extension of layout files, once declared here, you just purely use layout's name, when working with views
+    'storage_extension' => '.storage',              // extension of storage files
+    'storage_column_separator' => '|',              // the character(s) for separating the columns in a storage file
 
     'enable_plugins' => true,                       // enable plugins?
     'mb_internal_encoding' => 'UTF-8',              // set encoding for internal PHP functions
