@@ -2,10 +2,12 @@
 
 class base_controller {
 
-    protected static $layout = null;
+    protected $layout = null;
+    protected $tpl = null;
 
     public function __construct() {
-        self::$layout = 'default';
+        $this->layout = 'default';
+        $this->tpl = Model::get('Template');
     }
 
 }

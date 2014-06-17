@@ -3,15 +3,14 @@
 class error_404 extends base_controller {
 
     public function index() {
-        $tpl = Model::get('Template');
         $data = array(
             'title' => title('Error 404'),
-            'header' => $tpl->header(),
-            'content' => $tpl->content(array('content' => 'Oops, something went wrong.')),
-            'footer' => $tpl->footer()
+            'header' => $this->tpl->header(),
+            'content' => $this->tpl->content(array('content' => 'Oops, something went wrong.')),
+            'footer' => $this->tpl->footer()
         );
 
-        View::layout(self::$layout, $data);
+        View::layout($this->layout, $data);
     }
 
 }
