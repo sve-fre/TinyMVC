@@ -5,6 +5,7 @@ class HTML {
     private static $_closed = false;
     private static $_output = '';
 
+
     public static function make($tag, $attributes = array(), $callback = null) {
         self::$_output = '<' . $tag;
 

@@ -4,6 +4,7 @@ class App {
 
     private static $_initialized = false;
 
+
     private static function _setEnvironment() {
         if (count(Config::get('app.environment'))) {
             foreach (Config::get('app.environment') as $env) {
