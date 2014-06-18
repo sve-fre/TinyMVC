@@ -39,6 +39,22 @@ class Form {
     }
 
 
+    public function submit($name, $attributes = array()) {
+        if (array_key_exists('type', $attributes)) {
+            unset($attributes['type']);
+        }
+
+        self::$_output[] = View::render('submit', array(
+            'name' => $name,
+            'attributes' => $attributes
+        ), array(
+            'sub_dir' => array('template', 'form')
+        ));
+
+        return $this;
+    }
+
+
     public function textarea($name, $attributes = array()) {
         $value = (array_key_exists('value', $attributes)) ? $attributes['value'] : '';
 
