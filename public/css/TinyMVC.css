@@ -43,6 +43,7 @@ a:hover {
     background-color: #ddd;
 }
 
-.textfield-wrapper {
+.textfield-wrapper,
+.textarea-wrapper {
     padding: 10px;
 }

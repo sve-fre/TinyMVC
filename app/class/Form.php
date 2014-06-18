@@ -39,6 +39,25 @@ class Form {
     }
 
 
+    public function textarea($name, $attributes = array()) {
+        $value = (array_key_exists('value', $attributes)) ? $attributes['value'] : '';
+
+        if (array_key_exists('value', $attributes)) {
+            unset($attributes['value']);
+        }
+
+        self::$_output[] = View::render('textarea', array(
+            'name' => $name,
+            'value' => $value,
+            'attributes' => $attributes
+        ), array(
+            'sub_dir' => array('template', 'form')
+        ));
+
+        return $this;
+    }
+
+
     public function wrap($wrapper, $attributes = array()) {
         $num = count(self::$_output);
 
