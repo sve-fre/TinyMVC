@@ -48,3 +48,10 @@ a:hover {
 .submit-wrapper {
     padding: 10px;
 }
+
+.textfield-wrapper input,
+.textarea-wrapper textarea {
+    width: 300px;
+    padding: 3px;
+    border: 1px solid #aaa;
+}
