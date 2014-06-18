@@ -30,7 +30,7 @@ class Storage2 {
         }
 
 
-        if (!array_key_exists('id', $columns)) {
+        if (!in_array('id', $columns)) {
             array_unshift($columns, 'id');
         }
 
