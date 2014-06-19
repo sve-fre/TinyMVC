@@ -72,7 +72,7 @@ class DB2 {
             }
         }
 
-        return $result;
+        return (count($result) == 1) ? array_shift($result) : $result;
     }
 
 
