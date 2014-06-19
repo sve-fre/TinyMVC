@@ -94,6 +94,11 @@ class Storage2 {
     }
 
 
+    public function count() {
+        return count(self::$_storage) - 1;
+    }
+
+
     public static function get($storage) {
         if (self::$_instance === null) {
             self::$_instance = new self;
