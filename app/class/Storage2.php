@@ -111,7 +111,7 @@ class Storage2 {
             return false;
         }
 
-        return (isset(self::$_storages[$storage])) ? self::$_storages[$storage] : self::$_read($storage);
+        return (isset(self::$_storages[$storage])) ? self::$_storages[$storage] : self::_read($storage);
     }
 
 
