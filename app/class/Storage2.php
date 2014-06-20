@@ -66,7 +66,7 @@ class Storage2 {
         }
 
         $storage_data = self::_read($storage);
-        $column_names = explode(self::$_separator, $storage_data[0]);
+        $column_names = explode(self::$_separator, self::_removeNewLines($storage_data[0]));
         $last_id = explode(self::$_separator, $storage_data[count($storage_data) - 1])[0];
         $id = (is_numeric($last_id)) ? $last_id + 1 : 1;
         $tmp_data = array();
@@ -134,6 +134,11 @@ class Storage2 {
 
     private static function _file($storage) {
         return self::$_dir . $storage . self::$_extension;
+    }
+
+
+    private static function _removeNewLines($str) {
+        return str_replace("\n", '', $str);
     }
 
 
