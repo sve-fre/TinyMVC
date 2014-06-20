@@ -111,12 +111,8 @@ class Storage2 {
     }
 
 
-    public static function all($storage) {
-        if (!self::exists($storage)) {
-            return false;
-        }
-
-        return (isset(self::$_storages[$storage])) ? self::$_storages[$storage] : self::_read($storage);
+    public static function all() {
+        return self::$_storage;
     }
 
 
