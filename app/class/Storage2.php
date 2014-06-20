@@ -88,13 +88,20 @@ class Storage2 {
 
 
     public function where($column, $operator, $value) {
-        self::$_where[] = array(
-            'column' => $column,
-            'operator' => $operator,
-            'value' => $value
-        );
+        $storage = self::$_storage;
+        $column_names = explode(self::$_separator, self::_removeNewLines($storage[0]));
+        $index = array_keys($column_names, $column)[0];
+        $tmp_data = array();
 
-        return $this;
+        foreach (self::$_storage as $row) {
+            $row = explode(self::$_separator, self::_removeNewLines($row));
+
+            if ($row[$index] == $value) {
+                $tmp_data[] = $row;
+            }
+        }
+
+        return $tmp_data;
     }
 
 
