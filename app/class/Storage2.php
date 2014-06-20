@@ -78,6 +78,10 @@ class Storage2 {
             }
         }
 
+        if (!array_key_exists('id', $tmp_data)) {
+            array_unshift($tmp_data, $id);
+        }
+
         ksort($tmp_data);
         File::append(self::_file($storage), implode(self::$_separator, $tmp_data). "\n");
     }
