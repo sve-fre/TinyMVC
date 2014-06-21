@@ -72,7 +72,25 @@ class DB2 {
             }
         }
 
-        return (count($result) == 1) ? array_shift($result) : $result;
+        return $result;
+    }
+
+
+    public function selectRow($select) {
+        $result = array();
+        $query = $this->_db_connection->query($select);
+
+        if ($this->_db_wrapper === 'pdo' && $query->rowCount()) {
+            while ($obj = $query->fetchObject()) {
+                $result[] = $obj;
+            }
+        } elseif ($this->_db_wrapper === 'mysqli' && $query->num_rows) {
+            while ($obj = $query->fetch_object()) {
+                $result[] = $obj;
+            }
+        }
+
+        return array_shift($result);
     }
 
 
