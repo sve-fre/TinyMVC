@@ -1,1 +1,1 @@
-<input type="submit" name="<?php echo $name; ?>"<?php echo stringifyHTMLAttributes($attributes); ?>>
+<input type="submit" name="<?php echo $name; ?>"<?php echo $attributes; ?>>

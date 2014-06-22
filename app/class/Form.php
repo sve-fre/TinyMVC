@@ -14,7 +14,7 @@ class Form {
         self::$_output[] = View::render('form_open', array(
             'action' => $action,
             'method' => $method,
-            'attributes' => $attributes
+            'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
             'sub_dir' => array('template', 'form')
         ));
@@ -30,7 +30,7 @@ class Form {
     public function textfield($name, $attributes = array()) {
         self::$_output[] = View::render('textfield', array(
             'name' => $name,
-            'attributes' => $attributes
+            'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
             'sub_dir' => array('template', 'form')
         ));
@@ -46,7 +46,7 @@ class Form {
 
         self::$_output[] = View::render('submit', array(
             'name' => $name,
-            'attributes' => $attributes
+            'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
             'sub_dir' => array('template', 'form')
         ));
@@ -65,7 +65,7 @@ class Form {
         self::$_output[] = View::render('textarea', array(
             'name' => $name,
             'value' => $value,
-            'attributes' => $attributes
+            'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
             'sub_dir' => array('template', 'form')
         ));
