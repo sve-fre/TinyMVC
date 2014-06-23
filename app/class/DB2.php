@@ -9,7 +9,7 @@ class DB2 {
     private $_db_name = null;
     private $_db_wrapper = null;
     private $_db_connection = null;
-    private $_db_connection_error = false;
+    private $_db_errors = array();
 
 
     public static function instance() {
@@ -37,23 +37,43 @@ class DB2 {
     }
 
 
+    public function query($query, $params = array()) {
+        if ($this->_db_wrapper === 'pdo') {
+            try {
+                $stmt = $this->_db_connection->prepare($query);
+                if ($stmt->execute($params) !== false) {
+                    if  (preg_match("/^(" . implode("|", array("select", "describe", "pragma")) . ") /i", $query)) {
+                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        } elseif(preg_match("/^(" . implode("|", array("delete", "insert", "update")) . ") /i", $query)) {
+                            return $stmt->rowCount();
+                        }
+                }
+            } catch (PDOException $e) {
+
+            }
+        } elseif ($this->_db_wrapper === 'mysqli') {
+            die('No mysqli support for DB2::query() yet.');
+        }
+    }
+
+
     private function _connect() {
         if ($this->_db_wrapper === 'pdo') {
             try {
                 $this->_db_connection = new PDO('mysql:host=' . $this->_db_host . ';dbname=' . $this->_db_name, $this->_db_user, $this->_db_password);
             } catch (PDOException $e) {
-                $this->_db_connection_error = true;
+                $this->_db_errors[] = 'Could not connect to database (using PDO).';
             }
         } elseif ($this->_db_wrapper === 'mysqli') {
             $this->_db_connection = new mysqli($this->_db_host, $this->_db_user, $this->_db_password, $this->_db_name);
 
             if ($this->_db_connection->connect_errno) {
-                $this->_db_connection_error = true;
+                $this->_db_errors[] = 'Could not connect to database (using MySQLi).';
             }
         }
 
-        if ($this->_db_connection_error) {
-            die('Could not connect to database.');
+        if (count($this->_db_errors)) {
+            die(implode('<br>', $this->_db_errors));
         }
     }
 
