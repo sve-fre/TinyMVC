@@ -4,8 +4,8 @@ class home extends base_controller {
 
     public function index() {
         $form = Form::make('', 'POST', function($form) {
-            $form->textfield('name')->wrap('div', array('class' => 'textfield-wrapper'));
-            $form->textarea('text')->wrap('div', array('class' => 'textarea-wrapper'));
+            $form->input('text', 'name')->wrap('div', array('class' => 'textfield-wrapper'));
+            $form->input('password', 'password')->wrap('div', array('class' => 'textfield-wrapper'));
             $form->submit('submit', array('value' => 'OK'))->wrap('div', array('class' => 'submit-wrapper'));
         }, array(
             'class' => 'name-form'

@@ -30,8 +30,13 @@ class Form {
     }
 
 
-    public function textfield($name, $attributes = array()) {
-        self::$_output[] = View::render('textfield', array(
+    public function input($type, $name, $attributes = array()) {
+        if (!in_array($type, array('color', 'date', 'datetime', 'datetime-local', 'email', 'month', 'number', 'range', 'search', 'tel', 'time', 'url', 'week', 'text', 'password', 'checkbox', 'radio', 'submit', 'reset', 'file', 'hidden', 'image', 'button'))) {
+            $type = 'text';
+        }
+
+        self::$_output[] = View::render('input', array(
+            'type' => $type,
             'name' => $name,
             'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
