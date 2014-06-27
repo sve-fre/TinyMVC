@@ -23,7 +23,10 @@ class Form {
             $callback(new self);
         }
 
-        return implode('', self::$_output) . self::$_form_close;
+        $output = self::$_output;
+        self::$_output = array();
+
+        return implode('', $output) . self::$_form_close;
     }
 
 
