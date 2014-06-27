@@ -14,7 +14,6 @@ class App {
                     Config::set('app.db_user', $env['db_user']);
                     Config::set('app.db_password', $env['db_password']);
                     Config::set('app.db_name', $env['db_name']);
-                    Config::set('app.db_wrapper', $env['db_wrapper']);
                     Config::set('app.mod_rewrite', $env['mod_rewrite']);
                     Config::set('app.workmode', $env['workmode']);
                     break;

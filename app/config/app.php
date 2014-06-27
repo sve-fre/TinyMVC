@@ -8,7 +8,6 @@ return array(
             'db_user' => 'root',                            // mysql database user name
             'db_password' => '',                            // mysql database password
             'db_name' => '',                                // mysql database name
-            'db_wrapper' => 'pdo',                          // (pdo|mysqli)
             'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
             'workmode' => 'dev',                            // (dev|live) set error displays
         ),
@@ -18,7 +17,6 @@ return array(
             'db_user' => 'root',                            // mysql database user name
             'db_password' => '',                            // mysql database password
             'db_name' => '',                                // mysql database name
-            'db_wrapper' => 'pdo',                          // (pdo|mysqli)
             'mod_rewrite' => false,                         // (true|false) rename "htaccess.txt" to ".htaccess" => you'll get clean URLs
             'workmode' => 'dev',                            // (dev|live) set error displays
         )
