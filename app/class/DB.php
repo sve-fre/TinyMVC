@@ -60,15 +60,13 @@ class DB {
 
 
     public function exists($table) {
-        $table = $this->_db_connection->quote($table);
-
         try {
-            $result = $this->query("SELECT 1 FROM $table LIMIT 1");
+            $result = $this->query("SELECT * FROM $table LIMIT 1");
         } catch (Exception $e) {
-            return false;
+            $result = array();
         }
 
-        return $result !== false;
+        return (count($result)) ? true : false;
     }
 
 
