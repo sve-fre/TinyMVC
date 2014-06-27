@@ -6,6 +6,7 @@ class Form {
     private static $_method = null;
     private static $_output = array();
     private static $_form_close = '</form>';
+    private static $_fields = array();
 
 
     public static function make($action, $method, $callback, $attributes = array()) {
@@ -35,6 +36,12 @@ class Form {
             $type = 'text';
         }
 
+        self::$_fields[$name] = array(
+            'type' => $type,
+            'name' => $name,
+            'attributes' => $attributes
+        );
+
         self::$_output[] = View::render('input', array(
             'type' => $type,
             'name' => $name,
@@ -54,6 +61,11 @@ class Form {
         if (array_key_exists('value', $attributes)) {
             unset($attributes['value']);
         }
+
+        self::$_fields[$name] = array(
+            'name' => $name,
+            'attributes' => $attributes
+        );
 
         self::$_output[] = View::render('textarea', array(
             'name' => $name,
@@ -82,6 +94,54 @@ class Form {
 
         $output .= '>' . self::$_output[$num - 1] . '</' . $wrapper . '>';
         self::$_output[$num - 1] = $output;
+
+        return $this;
+    }
+
+
+    public function rules($rules) {
+        $field = end(self::$_fields);
+
+        if (isset($_POST[$field['name']])) {
+            if (is_array($rules) && count($rules)) {
+                foreach ($rules as $rule) {
+                    self::_validateRule($rule);
+                }
+
+                return $this;
+            }
+
+            self::_validateRule($rules);
+        }
+
+        return $this;
+    }
+
+
+    private function _validateRule($rule) {
+        $field = end(self::$_fields);
+
+        if ($rule === 'required') {
+            if (empty($_POST[$field['name']])) {
+                self::$_fields[$field['name']]['errors']['required'] = 'The ' . $field['name'] . ' field is required.';
+            }
+        }
+
+        if (String::contains($rule, 'min:')) {
+            $min = (int)explode(':', $rule)[1];
+
+            if (strlen($_POST[$field['name']]) <= $min) {
+                self::$_fields[$field['name']]['errors']['min'] = 'The ' . $field['name'] . ' has to have a minimum length of ' . $min . '.';
+            }
+        }
+
+        if (String::contains($rule, 'max:')) {
+            $max = (int)explode(':', $rule)[1];
+
+            if (strlen($_POST[$field['name']]) >= $max) {
+                self::$_fields[$field['name']]['errors']['min'] = 'The ' . $field['name'] . ' has to have a maximum length of ' . $max . '.';
+            }
+        }
     }
 
 }

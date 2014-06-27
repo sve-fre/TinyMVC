@@ -4,7 +4,10 @@ class home extends base_controller {
 
     public function index() {
         $form = Form::make('', 'POST', function($form) {
-            $form->input('text', 'name')->wrap('div', array('class' => 'textfield-wrapper'));
+            $form
+                ->input('text', 'name')
+                ->rules(array('required', 'min:3', 'max:30'))
+                ->wrap('div', array('class' => 'textfield-wrapper'));
             $form->input('password', 'password')->wrap('div', array('class' => 'textfield-wrapper'));
             $form->input('submit', 'login_form_submit', array('value' => 'OK'))->wrap('div', array('class' => 'submit-wrapper'));
         }, array(
