@@ -30,6 +30,19 @@ class DB {
     }
 
 
+    private function _connect() {
+        try {
+            $this->_db_connection = new PDO('mysql:host=' . $this->_db_host . ';dbname=' . $this->_db_name, $this->_db_user, $this->_db_password);
+        } catch (PDOException $e) {
+            $this->_db_errors[] = 'Could not connect to database (using PDO).';
+        }
+
+        if (count($this->_db_errors)) {
+            die(implode('<br>', $this->_db_errors));
+        }
+    }
+
+
     public function query($query, $params = array()) {
         try {
             $stmt = $this->_db_connection->prepare($query);
@@ -42,33 +55,38 @@ class DB {
             }
         } catch (PDOException $e) {
             $this->_db_errors[] = 'Error executing query (using PDO).';
-            echo $e->getMessage();
         }
     }
 
 
-    public function createTable($table, $columns = array(), $if_not_exists = true) {
+    public function exists($table) {
+        $table = $this->_db_connection->quote($table);
+
+        try {
+            $result = $this->query("SELECT 1 FROM $table LIMIT 1");
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return $result !== false;
+    }
+
+
+    public function truncate($table) {
+        $query = "TRUNCATE TABLE $table";
+        return $this->query($query);
+    }
+
+
+    public function create($table, $columns = array(), $if_not_exists = true) {
         $query = "CREATE TABLE " . ($if_not_exists ? "IF NOT EXISTS " : "") . $table . " (" . implode(", ", $columns) . ")";
         return $this->query($query);
     }
 
 
-    public function dropTable($table) {
+    public function drop($table) {
         $query = "DROP TABLE IF EXISTS " . $table;
         return $this->query($query);
-    }
-
-
-    private function _connect() {
-        try {
-            $this->_db_connection = new PDO('mysql:host=' . $this->_db_host . ';dbname=' . $this->_db_name, $this->_db_user, $this->_db_password);
-        } catch (PDOException $e) {
-            $this->_db_errors[] = 'Could not connect to database (using PDO).';
-        }
-
-        if (count($this->_db_errors)) {
-            die(implode('<br>', $this->_db_errors));
-        }
     }
 
 
