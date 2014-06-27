@@ -1,1 +1,1 @@
-<input type="<?php echo $type; ?>" name="<?php echo $name; ?>"<?php echo $attributes; ?>>
+<input type="<?php echo $type; ?>" value="<?php echo $value; ?>" name="<?php echo $name; ?>"<?php echo $attributes; ?>>

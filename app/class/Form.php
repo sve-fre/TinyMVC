@@ -38,6 +38,7 @@ class Form {
         self::$_output[] = View::render('input', array(
             'type' => $type,
             'name' => $name,
+            'value' => (array_key_exists('value', $attributes) ? $attributes['value'] : ((isset($_POST[$name]) && !empty($_POST[$name])) ? $_POST[$name] : '')),
             'attributes' => stringifyHTMLAttributes($attributes)
         ), array(
             'sub_dir' => array('template', 'form')
