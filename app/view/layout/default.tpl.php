@@ -12,6 +12,7 @@
 <body>
     <div id="wrapper">
         <?php echo $header; ?>
+        <?php if (isset($form_msg)) echo $form_msg; ?>
         <?php echo $content; ?>
         <?php echo $footer; ?>
     </div><!-- /#wrapper -->

@@ -27,15 +27,16 @@ class home extends base_controller {
         $form = Form::get();
 
         if (!Form::hasErrors()) {
-            Form::get('username');
+            $form_msg = 'No errors.';
         } else {
-            echo 'Ahm, there were errors.';
-            d(Form::getErrors());
+            $form_msg = 'Ahm, there were errors.';
+            //d(Form::getErrors());
         }
 
         $data = array(
             'title' => title(),
             'header' => $this->tpl->header(),
+            'form_msg' => $form_msg,
             'content' => $this->tpl->content(array('content' => $form)),
             'footer' => $this->tpl->footer()
         );
