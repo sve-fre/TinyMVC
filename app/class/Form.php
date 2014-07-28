@@ -2,15 +2,15 @@
 
 class Form {
 
-    private static $_action = null;
-    private static $_method = null;
-    private static $_output = array();
-    private static $_form_close = '</form>';
     private static $_fields = array();
+    private static $_output = array();
+    private static $_rules = array();
+    private static $_method = '';
+    private static $_errors = array();
 
 
-    public static function make($action, $method, $callback, $attributes = array()) {
-        self::$_action = $action;
+    public static function make($action, $method, $attributes = array()) {
+        self::$_fields = self::$_output = self::$_errors = array();
         self::$_method = $method;
         self::$_output[] = View::render('form_open', array(
             'action' => $action,
@@ -19,19 +19,10 @@ class Form {
         ), array(
             'sub_dir' => array('template', 'form')
         ));
-
-        if (is_callable($callback)) {
-            $callback(new self);
-        }
-
-        $output = self::$_output;
-        self::$_output = array();
-
-        return implode('', $output) . self::$_form_close;
     }
 
 
-    public function input($type, $name, $attributes = array()) {
+    public static function input($type, $name, $attributes = array()) {
         if (!in_array($type, array('color', 'date', 'datetime', 'datetime-local', 'email', 'month', 'number', 'range', 'search', 'tel', 'time', 'url', 'week', 'text', 'password', 'checkbox', 'radio', 'submit', 'reset', 'file', 'hidden', 'image', 'button'))) {
             $type = 'text';
         }
@@ -41,8 +32,24 @@ class Form {
             'name' => $name,
             'attributes' => $attributes
         );
+    }
 
-        self::$_output[] = View::render('input', array(
+
+    public static function hasErrors() {
+        return (count(self::$_errors));
+    }
+
+
+    private static function _render($type, $name, $attributes = array()) {
+        if (isset(self::$_errors[$name])) {
+            if (isset($attributes['class'])) {
+                $attributes['class'] = $attributes['class'] . ' error';
+            } else {
+                $attributes['class'] = 'error';
+            }
+        }
+
+        return View::render('input', array(
             'type' => $type,
             'name' => $name,
             'value' => (array_key_exists('value', $attributes) ? $attributes['value'] : ((isset($_POST[$name]) && !empty($_POST[$name])) ? $_POST[$name] : '')),
@@ -50,98 +57,79 @@ class Form {
         ), array(
             'sub_dir' => array('template', 'form')
         ));
-
-        return $this;
     }
 
 
-    public function textarea($name, $attributes = array()) {
-        $value = (array_key_exists('value', $attributes)) ? $attributes['value'] : '';
+    private static function _validate($rules) {
+        foreach ($rules as $name => $conditions) {
+            $method = (strtolower(self::$_method) == 'post') ? $_POST : $_GET;
+            $field = isset($method[$name]) ? $method[$name] : null;
 
-        if (array_key_exists('value', $attributes)) {
-            unset($attributes['value']);
-        }
+            if ($field !== null) {
+                foreach ($conditions as $condition) {
+                    // required
+                    if ($condition == 'required' && empty($field)) {
+                        self::$_errors[$name]['required'] = true;
+                    }
 
-        self::$_fields[$name] = array(
-            'name' => $name,
-            'attributes' => $attributes
-        );
+                    // min length
+                    if (is_string($field) && String::contains($condition, 'min:')) {
+                        $min = (int)explode(':', $condition)[1];
 
-        self::$_output[] = View::render('textarea', array(
-            'name' => $name,
-            'value' => $value,
-            'attributes' => stringifyHTMLAttributes($attributes)
-        ), array(
-            'sub_dir' => array('template', 'form')
-        ));
+                        if (strlen($field) < $min) {
+                            self::$_errors[$name]['min'] = true;
+                        }
+                    }
 
-        return $this;
-    }
+                    // max length
+                    if (is_string($field) && String::contains($condition, 'max:')) {
+                        $max = (int)explode(':', $condition)[1];
 
+                        if (strlen($field) > $max) {
+                            self::$_errors[$name]['max'] = true;
+                        }
+                    }
 
-    public function wrap($wrapper, $attributes = array()) {
-        $num = count(self::$_output);
+                    // alpha-numeric (alnum)
+                    if ($condition == 'alnum' && !ctype_alnum($field)) {
+                        self::$_errors[$name]['alnum'] = true;
+                    }
 
-        if (!isset(self::$_output[$num - 1])) {
-            return;
-        }
+                    // alpha-numeric + dash (alnumdash)
+                    if ($condition == 'alnumdash' && !preg_match("/^[a-zA-Z0-9-]+$/", $field)) {
+                        self::$_errors[$name]['alnumdash'] = true;
+                    }
 
-        $output = '<' . $wrapper;
-
-        if (count($attributes)) {
-            $output .= stringifyHTMLAttributes($attributes);
-        }
-
-        $output .= '>' . self::$_output[$num - 1] . '</' . $wrapper . '>';
-        self::$_output[$num - 1] = $output;
-
-        return $this;
-    }
-
-
-    public function rules($rules) {
-        $field = end(self::$_fields);
-
-        if (isset($_POST[$field['name']])) {
-            if (is_array($rules) && count($rules)) {
-                foreach ($rules as $rule) {
-                    self::_validateRule($rule);
+                    // alpha-numeric + underscore (alnumdash)
+                    if ($condition == 'alnumus' && !preg_match("/^[a-zA-Z0-9_]+$/", $field)) {
+                        self::$_errors[$name]['alnumus'] = true;
+                    }
                 }
-
-                return $this;
             }
-
-            self::_validateRule($rules);
         }
-
-        return $this;
     }
 
 
-    private function _validateRule($rule) {
-        $field = end(self::$_fields);
+    public static function rules($rules) {
+        self::$_rules = $rules;
+    }
 
-        if ($rule === 'required') {
-            if (empty($_POST[$field['name']])) {
-                self::$_fields[$field['name']]['errors']['required'] = 'The ' . $field['name'] . ' field is required.';
-            }
+
+    public static function get() {
+        if (count(self::$_rules)) {
+            self::_validate(self::$_rules);
         }
 
-        if (String::contains($rule, 'min:')) {
-            $min = (int)explode(':', $rule)[1];
-
-            if (strlen($_POST[$field['name']]) <= $min) {
-                self::$_fields[$field['name']]['errors']['min'] = 'The ' . $field['name'] . ' has to have a minimum length of ' . $min . '.';
-            }
+        foreach (self::$_fields as $field) {
+            self::$_output[] = self::_render($field['type'], $field['name'], $field['attributes']);
         }
 
-        if (String::contains($rule, 'max:')) {
-            $max = (int)explode(':', $rule)[1];
+        return implode('', self::$_output) . '</form>';
+    }
 
-            if (strlen($_POST[$field['name']]) >= $max) {
-                self::$_fields[$field['name']]['errors']['min'] = 'The ' . $field['name'] . ' has to have a maximum length of ' . $max . '.';
-            }
-        }
+
+    public static function getErrors() {
+        return self::$_errors;
     }
 
 }

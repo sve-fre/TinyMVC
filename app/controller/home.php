@@ -3,16 +3,35 @@
 class home extends base_controller {
 
     public function index() {
-        $form = Form::make('', 'POST', function($form) {
-            $form
-                ->input('text', 'name')
-                ->rules(array('required', 'min:3', 'max:30'))
-                ->wrap('div', array('class' => 'textfield-wrapper'));
-            $form->input('password', 'password')->wrap('div', array('class' => 'textfield-wrapper'));
-            $form->input('submit', 'login_form_submit', array('value' => 'OK'))->wrap('div', array('class' => 'submit-wrapper'));
-        }, array(
-            'class' => 'name-form'
+        Form::make('', 'POST', array(
+            'class' => 'form'
         ));
+
+        Form::input('text', 'username', array(
+            'class' => 'textfield', 'autocomplete' => 'off'
+        ));
+
+        Form::input('password', 'password', array(
+            'class' => 'password'
+        ));
+
+        Form::input('submit', 'login_form_submit', array(
+            'value' => 'Login'
+        ));
+
+        Form::rules(array(
+            'username' => array('required', 'min:3', 'max:5', 'alnumus'),
+            'password' => array('required', 'max:255')
+        ));
+
+        $form = Form::get();
+
+        if (!Form::hasErrors()) {
+            Form::get('username');
+        } else {
+            echo 'Ahm, there were errors.';
+            d(Form::getErrors());
+        }
 
         $data = array(
             'title' => title(),
