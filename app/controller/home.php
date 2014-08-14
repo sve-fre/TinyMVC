@@ -25,12 +25,15 @@ class home extends base_controller {
         ));
 
         $form = Form::get();
+        $form_msg = '';
 
-        if (!Form::hasErrors()) {
-            $form_msg = 'No errors.';
-        } else {
-            $form_msg = 'Ahm, there were errors.';
-            //d(Form::getErrors());
+        if (Form::submitted()) {
+            if (!Form::hasErrors()) {
+                $form_msg = 'No errors.';
+            } else {
+                $form_msg = 'Ahm, there were errors.';
+                //d(Form::getErrors());
+            }
         }
 
         $data = array(

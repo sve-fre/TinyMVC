@@ -40,6 +40,11 @@ class Form {
     }
 
 
+    public static function submitted() {
+        return (count($_POST) > 0);
+    }
+
+
     private static function _render($type, $name, $attributes = array()) {
         if (isset(self::$_errors[$name])) {
             if (isset($attributes['class'])) {
