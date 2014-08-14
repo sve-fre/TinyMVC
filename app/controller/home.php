@@ -29,7 +29,15 @@ class home extends base_controller {
 
         if (Form::submitted()) {
             if (!Form::hasErrors()) {
-                $form_msg = 'No errors.';
+                extract($_POST);
+
+                $user_data = DB::instance()->query('SELECT * FROM users WHERE username = :username AND password = :password LIMIT 1', array(':username' => $username, ':password' => md5($password)));
+
+                if ($user_data) {
+                    $form_msg = 'Alright, lets go';
+                } else {
+                    $form_msg = 'Username-password combination does not exist.';
+                }
             } else {
                 $form_msg = 'Ahm, there were errors.';
                 //d(Form::getErrors());
