@@ -34,7 +34,12 @@ class home extends base_controller {
                 $user_data = DB::instance()->query('SELECT * FROM users WHERE username = :username AND password = :password LIMIT 1', array(':username' => $username, ':password' => md5($password)));
 
                 if ($user_data) {
-                    $form_msg = 'Alright, lets go';
+                    $form_msg = 'Alright, let\'s go';
+                    $user_data = Session::make('user_data', 1337);
+
+                    if (Session::get('user_data') !== null) {
+                        header('location: ' .  url('dashboard'));
+                    }
                 } else {
                     $form_msg = 'Username-password combination does not exist.';
                 }

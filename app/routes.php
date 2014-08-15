@@ -1,5 +1,7 @@
 <?php
 
+Router::register('logout', 'dashboard@logout');
+
 Router::route('home/about', function() {
     $tpl = Model::get('Template');
     $data = array(
