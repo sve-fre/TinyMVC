@@ -4,7 +4,7 @@ class Request {
 
     public static function get() {
         $install_dir = (App::isInstalledInSubDir()) ? App::getSubDir() : '';
-        $req = ltrim($_SERVER['REQUEST_URI'], '/');
+        $req = (App::isInstalledInSubDir()) ? ltrim($_SERVER['REQUEST_URI'], '/') : $_SERVER['REQUEST_URI'];
 
         if (!Config::get('app.mod_rewrite')) {
             $req = str_replace(
