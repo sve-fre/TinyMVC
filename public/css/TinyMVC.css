@@ -8,40 +8,41 @@ body {
 }
 
 #wrapper {
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
-    margin: 10px auto;
-    width: 960px;
+    margin: 70px auto 0;
 }
 
-h1 {
+/**
+ * ################ HEADER ################
+ */
+
+header {
+    position: relative;
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/**
+ * ################ FOOTER ################
+ */
+
+#footer {
+    margin: 50px 0 0;
+    background-color: #F8F8F8;
+    padding: 10px 0;
+    border-top: 1px solid #e7e7e7;
+}
+
+#footer p {
     margin: 0;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 10px 0 0;
-}
-
-a {
-    outline: none;
-    text-decoration: none;
-    color: #1E90FF;
-}
-
-a:hover {
-    color: darkslateblue;
-}
-
-.name-form {
-    background-color: #ddd;
-}
+/**
+ * ################ MISC ################
+ */
 
 .textfield-wrapper,
 .textarea-wrapper,
@@ -54,14 +55,4 @@ a:hover {
     width: 300px;
     padding: 3px;
     border: 1px solid #aaa;
-}
-
-header {
-    position: relative;
-}
-
-.logout {
-    position: absolute;
-    top: 0;
-    right: 0;
 }

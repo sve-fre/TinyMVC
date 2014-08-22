@@ -110,3 +110,49 @@ function stringifyHTMLAttributes($attributes = array()) {
     return $output;
 }
 
+function sql($type, $name = '', $options = array()) {
+    switch ($type) {
+        case 'int':
+        case 'integer':
+            return $name . ' INT';
+            break;
+        case 'tinyint':
+        case 'tinyinteger':
+        case 'tinyInt':
+        case 'tinyInteger':
+            return $name . ' TINYINT';
+            break;
+        case 'bigint':
+        case 'biginteger':
+        case 'bigInt':
+        case 'biginteger':
+            return $name . ' BIGINT';
+            break;
+        case 'float':
+            return $name . ' FLOAT';
+            break;
+        case 'double':
+            return $name . ' DOUBLE';
+            break;
+        case 'var':
+        case 'varchar':
+            return $name . ' VARCHAR (' . ((isset($options['length']) && is_numeric($options['length']) && $options['length'] <= 255) ? (int)$options['length'] : 255) . ')';
+            break;
+        case 'text':
+            return $name . ' TEXT';
+            break;
+        case 'date':
+            return $name . ' DATE';
+            break;
+        case 'datetime':
+            return $name . ' DATETIME';
+            break;
+        case 'timestamp':
+            return $name . ' TIMESTAMP';
+        case 'time':
+            return $name . ' TIME';
+            break;
+        case 'id':
+            return 'id INT NOT NULL AUTO_INCREMENT PRIMARY KEY';
+    }
+}

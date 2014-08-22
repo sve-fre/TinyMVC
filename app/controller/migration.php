@@ -5,16 +5,19 @@ class migration extends base_controller {
     public function make() {
         if (!DB::instance()->exists('users')) {
             DB::instance()->create('users', array(
-                'id INT NOT NULL AUTO_INCREMENT PRIMARY KEY',
-                'username VARCHAR (30)',
-                'password VARCHAR (255)',
-                'email VARCHAR (255)'
+                sql('id'),
+                sql('varchar', 'username', 30),
+                sql('varchar', 'password'),
+                sql('varchar', 'email'),
+                sql('datetime', 'created_at'),
+                sql('timestamp', 'updated_at')
             ));
 
-            DB::instance()->query('INSERT INTO users (id, username, password, email) VALUES (null, :username, :password, :email)', array(
+            DB::instance()->query('INSERT INTO users (id, username, password, email, created_at) VALUES (null, :username, :password, :email, :created_at)', array(
                 ':username' => 'admin',
                 ':password' => md5('password123'),
-                ':email' => 'admin@website.com'
+                ':email' => 'admin@website.com',
+                ':created_at' => date('Y-m-d H:i:s')
             ));
 
             $content = 'Created table users, inserted admin user.';
