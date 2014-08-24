@@ -32,6 +32,7 @@ class App {
         if (!self::$_initialized) {
             App::setWorkMode(Config::get('app.workmode'));
             mb_internal_encoding(Config::get('app.mb_internal_encoding'));
+            date_default_timezone_set(Config::get('app.default_timezone'));
 
             if (File::exists(path('controller') . 'base_controller.php')) {
                 require_once path('controller') . 'base_controller.php';

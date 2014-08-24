@@ -35,4 +35,5 @@ return array(
 
     'enable_plugins' => true,                       // enable plugins?
     'mb_internal_encoding' => 'UTF-8',              // set encoding for internal PHP functions
+    'default_timezone' => 'Europe/Berlin',          // set default timezone for date() function
 );
