@@ -54,14 +54,28 @@ class Form {
             }
         }
 
-        return View::render('input', array(
+        $value = (array_key_exists('value', $attributes) ? $attributes['value'] : ((isset($_POST[$name]) && !empty($_POST[$name])) ? $_POST[$name] : ''));
+
+        if (isset($attributes['value'])) {
+            unset($attributes['value']);
+        }
+
+        if (isset($attributes['wrap']) && is_array($attributes['wrap'])) {
+            $wrap_open = '<' . $attributes['wrap'][0] . stringifyHTMLAttributes($attributes['wrap'][1]) . '>';
+            $wrap_close = '</' . $attributes['wrap'][0] . '>';
+            unset($attributes['wrap']);
+        } else {
+            $wrap_open = $wrap_close = '';
+        }
+
+        return $wrap_open . View::render('input', array(
             'type' => $type,
             'name' => $name,
-            'value' => (array_key_exists('value', $attributes) ? $attributes['value'] : ((isset($_POST[$name]) && !empty($_POST[$name])) ? $_POST[$name] : '')),
-            'attributes' => stringifyHTMLAttributes($attributes)
+            'value' => $value,
+            'attributes' => stringifyHTMLAttributes($attributes, ($type == 'submit' ? true : false))
         ), array(
             'sub_dir' => array('template', 'form')
-        ));
+        )) . $wrap_close;
     }
 
 

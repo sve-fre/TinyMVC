@@ -98,8 +98,12 @@ function getData($uri) {
     }
 }
 
-function stringifyHTMLAttributes($attributes = array()) {
+function stringifyHTMLAttributes($attributes = array(), $is_submit = false) {
     $output = '';
+
+    if ($is_submit && isset($attributes['value'])) {
+        unset($attributes['value']);
+    }
 
     if (count($attributes)) {
         foreach ($attributes as $property => $value) {

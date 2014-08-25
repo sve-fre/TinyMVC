@@ -4,19 +4,24 @@ class home extends base_controller {
 
     public function index() {
         Form::make('', 'POST', array(
-            'class' => 'form'
+            'class' => 'form form-inline',
+            'role' => 'form'
         ));
 
         Form::input('text', 'username', array(
-            'class' => 'textfield', 'autocomplete' => 'off'
+            'class' => 'textfield form-control',
+            'autocomplete' => 'off',
+            'wrap' => array('div', array('class' => 'form-group'))
         ));
 
         Form::input('password', 'password', array(
-            'class' => 'password'
+            'class' => 'password form-control',
+            'wrap' => array('div', array('class' => 'form-group'))
         ));
 
         Form::input('submit', 'login_form_submit', array(
-            'value' => 'Login'
+            'value' => 'Login',
+            'class' => 'btn btn-default'
         ));
 
         Form::rules(array(
