@@ -8,51 +8,41 @@ body {
 }
 
 #wrapper {
-    margin: 70px auto 0;
+    margin: 0 auto;
+    max-width: 1160px;
+    padding: 10px;
+    background-color: #fff;
 }
 
 /**
  * ################ HEADER ################
  */
 
-header {
-    position: relative;
+header ul {
+    margin: 0 0 20px;
+    padding: 0;
 }
 
-.logout {
-    position: absolute;
-    top: 0;
-    right: 0;
+header ul li {
+    display: inline-block;
+    margin: 0 20px 0 0;
 }
 
 /**
  * ################ FOOTER ################
  */
 
-#footer {
+footer {
     margin: 50px 0 0;
     background-color: #F8F8F8;
-    padding: 10px 0;
+    padding: 10px;
     border-top: 1px solid #e7e7e7;
 }
 
-#footer p {
+footer p {
     margin: 0;
 }
 
 /**
  * ################ MISC ################
  */
-
-.textfield-wrapper,
-.textarea-wrapper,
-.submit-wrapper {
-    padding: 10px;
-}
-
-.textfield-wrapper input,
-.textarea-wrapper textarea {
-    width: 300px;
-    padding: 3px;
-    border: 1px solid #aaa;
-}

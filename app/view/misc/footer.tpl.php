@@ -1,3 +1,1 @@
-<footer>
-    <p>by fmllr.com</p>
-</footer>
+<p>by fmllr.com</p>
